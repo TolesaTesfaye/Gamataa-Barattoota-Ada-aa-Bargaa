@@ -25,6 +25,21 @@ const GRADIENTS = [
 
 const sampleAlbums: Album[] = [
   {
+    _id: "2018",
+    title: "2018 Gallery",
+    description: "Gabaasa suuraa fi waan cimaa bara 2018 keessatti ta'aniif yaadannoo.",
+    images: [
+      { _id: "2018-1", url: "/gallery-2018/photo_2026-04-26_22-03-19.jpg", caption: "Walga'ii guddaa bara 2018" },
+      { _id: "2018-2", url: "/gallery-2018/photo_2026-06-02_15-32-27.jpg", caption: "Baga gammaddaa fi kabajaa" },
+      { _id: "2018-3", url: "/gallery-2018/photo_2026-06-02_15-33-22.jpg", caption: "Itoophiyaa keenya kabajaa" },
+      { _id: "2018-4", url: "/gallery-2018/photo_2026-06-02_15-33-29.jpg", caption: "Kabajaa fi kabajaa" },
+      { _id: "2018-5", url: "/gallery-2018/photo_2026-06-02_15-33-38.jpg", caption: "Baga gammaddaa" },
+      { _id: "2018-6", url: "/gallery-2018/photo_2026-06-02_15-33-44.jpg", caption: "Walqabii fi jaalala" },
+      { _id: "2018-7", url: "/gallery-2018/photo_2026-06-02_15-33-51.jpg", caption: "Waliin jiraachuu fi wal gargaaruu" },
+      { _id: "2018-8", url: "/gallery-2018/photo_2026-06-02_15-34-03.jpg", caption: "Walitti dhufeenya cimaa" },
+    ],
+  },
+  {
     _id: "s1",
     title: "Annual Conference 2025",
     description: "Highlights from our annual gathering bringing together members from across the UK for a weekend of legal discourse and networking.",
