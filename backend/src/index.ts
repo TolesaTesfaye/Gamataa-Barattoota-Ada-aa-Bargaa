@@ -28,9 +28,25 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:5173",
+  "https://gamataa-barattoota-ada-aa-bargaa.vercel.app",
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (curl, mobile apps, etc.)
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app")
+      ) {
+        callback(null, true);
+      } else {
+        callback(null, true); // Allow all in production for now
+      }
+    },
     credentials: true,
   }),
 );
