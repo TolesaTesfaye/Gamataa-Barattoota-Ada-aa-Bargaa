@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../services/api";
 import { useAuthStore } from "../store/authStore";
 
+interface Attendee {
+  _id?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+}
+
 interface Event {
   _id: string;
   title: string;
@@ -13,7 +20,7 @@ interface Event {
   category: string;
   status: string;
   maxAttendees: number;
-  attendees: any[];
+  attendees: Attendee[];
 }
 
 const EMPTY_FORM = {
@@ -52,8 +59,9 @@ export default function AdminEvents() {
     try {
       const response = await apiClient.get("/events");
       setEvents(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to fetch events");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to fetch events");
     } finally {
       setLoading(false);
     }
@@ -96,8 +104,9 @@ export default function AdminEvents() {
       setShowForm(false);
       setEditing(null);
       fetchEvents();
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to save event");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to save event");
     } finally {
       setSaving(false);
     }
@@ -109,8 +118,9 @@ export default function AdminEvents() {
       await apiClient.delete(`/events/${id}`);
       setEvents((prev) => prev.filter((e) => e._id !== id));
       setSuccess("Event deleted.");
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to delete event");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to delete event");
     }
   };
 
@@ -118,10 +128,11 @@ export default function AdminEvents() {
     try {
       await apiClient.patch(`/events/${id}`, { status });
       setEvents((prev) =>
-        prev.map((e) => (e._id === id ? { ...e, status } : e))
+        prev.map((e) => (e._id === id ? { ...e, status } : e)),
       );
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to change status");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to change status");
     }
   };
 
@@ -394,7 +405,7 @@ export default function AdminEvents() {
               <p className="text-gray-600">No attendees yet.</p>
             ) : (
               <ul className="space-y-2">
-                {viewAttendees.attendees.map((att: any, i: number) => (
+                {viewAttendees.attendees.map((att: Attendee, i: number) => (
                   <li
                     key={i}
                     className="flex items-center gap-3 p-2 bg-gray-50 rounded"

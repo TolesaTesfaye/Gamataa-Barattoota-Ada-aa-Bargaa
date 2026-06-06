@@ -12,6 +12,12 @@ interface Event {
   status: string;
 }
 
+const tabLabels: Record<string, string> = {
+  upcoming: "Kan Dhufu",
+  past: "Kan Darbe",
+  all: "Hunda",
+};
+
 export default function MyEvents() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,7 +36,7 @@ export default function MyEvents() {
       setEvents(response.data);
     } catch (err: any) {
       setError(
-        err.response?.data?.message || "Failed to fetch your events"
+        err.response?.data?.message || "Taateewwan kee fudhachuu hin dandeenye"
       );
     } finally {
       setLoading(false);
@@ -38,12 +44,12 @@ export default function MyEvents() {
   };
 
   const handleUnregister = async (eventId: string) => {
-    if (!window.confirm("Are you sure you want to unregister?")) return;
+    if (!window.confirm("Dhugumaan galmeessa haquu barbaaddaa?")) return;
     try {
       await apiClient.delete(`/events/${eventId}/register`);
       setEvents((prev) => prev.filter((e) => e._id !== eventId));
     } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to unregister");
+      setError(err.response?.data?.message || "Galmeessa haquu hin dandeenye");
     }
   };
 
@@ -56,7 +62,7 @@ export default function MyEvents() {
   });
 
   if (loading) {
-    return <div className="text-center py-12">Loading your events...</div>;
+    return <div className="text-center py-12">Taateewwan kee fe'aa jira...</div>;
   }
 
   if (error) {
@@ -69,7 +75,7 @@ export default function MyEvents() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-      <h1 className="text-4xl font-bold text-primary">My Events</h1>
+      <h1 className="text-4xl font-bold text-primary">Taateewwan Koo</h1>
 
       <div className="flex gap-2">
         {(["upcoming", "past", "all"] as const).map((tab) => (
@@ -89,7 +95,7 @@ export default function MyEvents() {
 
       {filteredEvents.length === 0 ? (
         <p className="text-gray-600">
-          No {activeTab === "all" ? "" : activeTab} events found.
+          Taateewwan {activeTab === "all" ? "" : tabLabels[activeTab] || activeTab} hin argamne.
         </p>
       ) : (
         <div className="space-y-4">
@@ -122,11 +128,11 @@ export default function MyEvents() {
 
               <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                 <div>
-                  <strong className="text-gray-600">Date:</strong>
+                  <strong className="text-gray-600">Guyyaa:</strong>
                   <p>{new Date(event.date).toLocaleDateString()}</p>
                 </div>
                 <div>
-                  <strong className="text-gray-600">Location:</strong>
+                  <strong className="text-gray-600">Bakka:</strong>
                   <p>{event.location}</p>
                 </div>
               </div>
@@ -135,7 +141,7 @@ export default function MyEvents() {
                 onClick={() => handleUnregister(event._id)}
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
               >
-                Unregister
+                Galmeessa Haqi
               </button>
             </div>
           ))}

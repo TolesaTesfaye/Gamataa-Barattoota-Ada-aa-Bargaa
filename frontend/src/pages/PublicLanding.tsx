@@ -20,13 +20,13 @@ export default function PublicLanding() {
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                 </svg>
-                Login
+                Seeni
               </Link>
               <Link
                 to="/register"
                 className="inline-flex items-center gap-1.5 px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-lg shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-200 hover:scale-[1.02]"
               >
-                Get Started
+                Jalqabi
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -65,7 +65,7 @@ export default function PublicLanding() {
               to="/register"
               className="group relative inline-flex items-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-blue-700 font-bold text-base sm:text-lg rounded-xl shadow-2xl hover:shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:scale-105 active:scale-[1.02] transition-all duration-300 overflow-hidden"
             >
-              <span className="relative z-10">Join the Community</span>
+                <span className="relative z-10">Hawaasa Keenyatti Makamuu</span>
               <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -78,7 +78,7 @@ export default function PublicLanding() {
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
               </svg>
-              Sign In
+              Seeni
             </Link>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function PublicLanding() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold tracking-wide mb-4">
-              WHAT WE DO
+              WAAN NU HOJJENNU
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-5 tracking-tight">
               Waan <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Nu</span> Hojjennu
@@ -131,9 +131,9 @@ export default function PublicLanding() {
         <div className="absolute top-1/4 left-0 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 text-xs sm:text-sm font-semibold tracking-wide mb-5 sm:mb-6">
-            JOIN US TODAY
-          </span>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 text-xs sm:text-sm font-semibold tracking-wide mb-5 sm:mb-6">
+              HAR'A MAKAMUU
+            </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 sm:mb-6 tracking-tight leading-tight">
             Qophii Gamtaa Keenyatti
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">Makamuu?</span>
@@ -181,7 +181,7 @@ export default function PublicLanding() {
             </div>
             <div className="max-w-lg">
               <span className="inline-block px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold tracking-wide mb-4">
-                ABOUT US
+                WAA'EE KEEENYA
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-5 tracking-tight">
                 Waa'ee <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gamtaa</span>
@@ -223,8 +223,8 @@ export default function PublicLanding() {
               </span>
             </div>
             <div className="flex items-center gap-4 sm:gap-6">
-              <Link to="/login" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Login</Link>
-              <Link to="/register" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Register</Link>
+              <Link to="/login" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Seeni</Link>
+              <Link to="/register" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Galmee</Link>
             </div>
           </div>
         </div>

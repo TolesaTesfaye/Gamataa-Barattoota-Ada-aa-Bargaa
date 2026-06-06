@@ -7,7 +7,7 @@ interface NewsItem {
   _id: string;
   title: string;
   content: string;
-  author: any;
+  author: { firstName?: string; lastName?: string } | string;
   category: string;
   status: string;
   image: string;
@@ -48,8 +48,9 @@ export default function AdminNews() {
     try {
       const response = await apiClient.get("/news");
       setNews(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to fetch news");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to fetch news");
     } finally {
       setLoading(false);
     }
@@ -89,8 +90,9 @@ export default function AdminNews() {
       setShowForm(false);
       setEditing(null);
       fetchNews();
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to save news");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to save news");
     } finally {
       setSaving(false);
     }
@@ -102,8 +104,9 @@ export default function AdminNews() {
       await apiClient.delete(`/news/${id}`);
       setNews((prev) => prev.filter((n) => n._id !== id));
       setSuccess("News deleted.");
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to delete");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to delete");
     }
   };
 
@@ -112,10 +115,11 @@ export default function AdminNews() {
     try {
       await apiClient.patch(`/news/${id}`, { status: newStatus });
       setNews((prev) =>
-        prev.map((n) => (n._id === id ? { ...n, status: newStatus } : n))
+        prev.map((n) => (n._id === id ? { ...n, status: newStatus } : n)),
       );
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to toggle status");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to toggle status");
     }
   };
 
@@ -229,11 +233,7 @@ export default function AdminNews() {
                 disabled={saving}
                 className="bg-primary text-white px-6 py-2 rounded hover:bg-secondary transition disabled:opacity-50"
               >
-                {saving
-                  ? "Saving..."
-                  : editing
-                    ? "Update"
-                    : "Create"}
+                {saving ? "Saving..." : editing ? "Update" : "Create"}
               </button>
               <button
                 type="button"

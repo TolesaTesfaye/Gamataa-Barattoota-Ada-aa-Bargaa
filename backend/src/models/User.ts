@@ -1,11 +1,12 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IUser extends Document {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
-  role: 'student' | 'admin' | 'superadmin';
+  phone: string;
+  role: "student" | "admin" | "superadmin";
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -35,17 +36,21 @@ const userSchema = new Schema<IUser>(
       required: true,
       trim: true,
     },
+    phone: {
+      type: String,
+      default: "",
+    },
     role: {
       type: String,
-      enum: ['student', 'admin', 'superadmin'],
-      default: 'student',
+      enum: ["student", "admin", "superadmin"],
+      default: "student",
     },
     isActive: {
       type: Boolean,
       default: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Hash password before saving (implement in service)
@@ -55,4 +60,4 @@ userSchema.methods.toJSON = function () {
   return obj;
 };
 
-export const User = mongoose.model<IUser>('User', userSchema);
+export const User = mongoose.model<IUser>("User", userSchema);

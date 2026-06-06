@@ -27,7 +27,8 @@ export const students: Student[] = [
     phone: "+251910193599",
     entry: "2013",
     role: "Hundeeffataa",
-    message: "An yeroon dhufu nama mooraa yuunivarsiitichaa keessatti beeku waan hin qabneef rakkoowwan tokko tokko na mudataniiru. Isaanis yeroo an gara mooraa dhufu haaraa waanan ta'eef kanneen akka lakkoofsa dormii wallaaluu, tajaajiloota garagaraa iddoo isaa wallaaluu, akkasumas gama barnootaatiin odeeffannoo garagaraa dhabuurraan kan ka'e wantoonni tokko tokko na mudataniiru. Dabalataan immoo mooraa keessatti barattoota beeku waanan hin qabneef qofa ta'u kiyyan jeeqameera. Yaa ta'u iyyuu malee erga rakkoowwan kana dabarseen boodatti ijoollee aanaa Ada'a Bargaa sanan dura yuunivarsiiticha keessa jiran waliin wal bare, sana booda barattoota mooraa keessa turan waliin akka gamtaa tokkummaa kana dhaabnu mari'achuudhaan gamtaa maqaansaa armaan olitti eerame kana akka dhaabbatu ka'uumsa ta'eera.",
+    message:
+      "An yeroon dhufu nama mooraa yuunivarsiitichaa keessatti beeku waan hin qabneef rakkoowwan tokko tokko na mudataniiru. Isaanis yeroo an gara mooraa dhufu haaraa waanan ta'eef kanneen akka lakkoofsa dormii wallaaluu, tajaajiloota garagaraa iddoo isaa wallaaluu, akkasumas gama barnootaatiin odeeffannoo garagaraa dhabuurraan kan ka'e wantoonni tokko tokko na mudataniiru. Dabalataan immoo mooraa keessatti barattoota beeku waanan hin qabneef qofa ta'u kiyyan jeeqameera. Yaa ta'u iyyuu malee erga rakkoowwan kana dabarseen boodatti ijoollee aanaa Ada'a Bargaa sanan dura yuunivarsiiticha keessa jiran waliin wal bare, sana booda barattoota mooraa keessa turan waliin akka gamtaa tokkummaa kana dhaabnu mari'achuudhaan gamtaa maqaansaa armaan olitti eerame kana akka dhaabbatu ka'uumsa ta'eera.",
     bio: "Ani maqaan koo Oliiqaa Girmaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Sanbarroo Saggoo jedhamtuuttidha. Barnoota koo mana barumsaa Mugher Community sadarkaa 2ffaatti baradhe. Yeroo jalqabaaf gara Yuunivarsiitii Haramaayaa dhufu, rakkina hedduu kan akka doormii wallaaluu, tajaajiloota beekuu dhabuu fi soda qofa jiraachuu na mudate. Rakkina kana ofii koo irratti hubachuun, obboloota koo akka rakkinni kun irra hin geenyeef yaaduu fi waan beeku isaanitti darbuu fi mari'achuudhaan gamtaa kana hundeessuuf ka'umsa ta'eera. Yeroo ammaatti barataa Chemical Engineering waggaa GC Yuunivarsiitii Haramaayaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251910193599.",
   },
   {
@@ -41,7 +42,8 @@ export const students: Student[] = [
     phone: "+251928235719",
     entry: "2014",
     role: "Walitti Qabaa Duraa",
-    message: "Ani maqaan koo Milkeessaa Sisaayiin jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa iddoo Olonkomii jedhamtuutidha. Haramayaa Yuunivarsiititti barataa Ikkonomiksii waggaa 4ffaati. Bara hundeeffama gamtaa kanaa irraa eegalee hanga bara 2017tti walitti qabaa tahee tajaajileera.",
+    message:
+      "Ani maqaan koo Milkeessaa Sisaayiin jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa iddoo Olonkomii jedhamtuutidha. Haramayaa Yuunivarsiititti barataa Ikkonomiksii waggaa 4ffaati. Bara hundeeffama gamtaa kanaa irraa eegalee hanga bara 2017tti walitti qabaa tahee tajaajileera.",
     bio: "Ani maqaan koo Milkeessaa Sisaayiin jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa iddoo Olonkomii jedhamtuuttidha. Barnoota koo mana barumsaa Enchini 2nd School sadarkaa 2ffaatti baradhe. Haramayaa Yuunivarsiititti barataa Economics waggaa 4ffaati. Bara hundeeffama gamtaa kanaa irraa eegalee hanga bara 2017tti walitti qabaa duraa ta'ee tajaajileera. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251928235719.",
   },
   {
@@ -55,7 +57,8 @@ export const students: Student[] = [
     phone: "+251996612005",
     entry: "2014",
     role: "Maalaqa",
-    message: "Ani maqaan koo Sannayit Baqqalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnitti. Mana barnoota Incinnii sadarkaa 2ffattin baradhe. Amma Haramayaa Yuunivarsiititti barattu GIS waggaa 4ffaati. Gamtaa barattoota Ada'a Bargaa keessatti hundeeffama isaa irraa hanga bara 2016tti akka maalaqa qabduutti tajaajileera.",
+    message:
+      "Ani maqaan koo Sannayit Baqqalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnitti. Mana barnoota Incinnii sadarkaa 2ffattin baradhe. Amma Haramayaa Yuunivarsiititti barattu GIS waggaa 4ffaati. Gamtaa barattoota Ada'a Bargaa keessatti hundeeffama isaa irraa hanga bara 2016tti akka maalaqa qabduutti tajaajileera.",
     bio: "Ani maqaan koo Sannayit Baqqalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnitti. Mana barnoota Incinnii sadarkaa 2ffattin baradhe. Amma Haramayaa Yuunivarsiititti barattu GIS waggaa 4ffaati. Gamtaa barattoota Ada'a Bargaa keessatti hundeeffama isaa irraa hanga bara 2016tti akka maalaqa qabduutti tajaajileera. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251996612005.",
   },
   {
@@ -69,7 +72,8 @@ export const students: Student[] = [
     phone: "+251980175917",
     entry: "2014",
     role: "Maalaqa",
-    message: "Ani maqaan koo Tigist Takluun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barnootaa Mugher Community sadarkaa 2ffattin baradhe. Amma Haramayaa Yuunivarsiititti barattu GIS waggaa 4ffaati. Gamtaa barattoota Ada'a Bargaa keessatti hundeeffama isaa irraa hanga ammatti tajaajileera.",
+    message:
+      "Ani maqaan koo Tigist Takluun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barnootaa Mugher Community sadarkaa 2ffattin baradhe. Amma Haramayaa Yuunivarsiititti barattu GIS waggaa 4ffaati. Gamtaa barattoota Ada'a Bargaa keessatti hundeeffama isaa irraa hanga ammatti tajaajileera.",
     bio: "Ani maqaan koo Tigist Takluun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barnootaa Mugher Community sadarkaa 2ffattin baradhe. Amma Haramayaa Yuunivarsiititti barattu GIS waggaa 4ffaati. Gamtaa barattoota Ada'a Bargaa keessatti hundeeffama isaa irraa hanga ammatti tajaajiluudhaan jirti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251980175917.",
   },
   {
@@ -81,10 +85,11 @@ export const students: Student[] = [
     village: "Ejeree Naga'o (Corrisee)",
     school: "Inchini 2nd School",
     phone: "+251975863448",
-    email: "tolestatesfaye27@gmail.com",
+    email: "tolesatesfaye27@gmail.com",
     entry: "2015",
     role: "Walitti Qabaa",
-    message: "Dhugumaan obboloota jaalala qaban giddu jiraachun akka nama gammachiisu ija koon argeera, adda baasee hubadheera. Kanaaf, jaalala jechuun obboloota keef jiraachudha! Ani ergan guyyaa gamtaa kanatti dabalamee kaasee baay'ee gammadaadha. Waan hedduus hubadheera, dhuguma dubbachuuf akka yaada kootti guyyaa guyyaan osoon obboloota koo waliin wal argee baay'ee natti tola, hedduus na gammachiisa. Ta'us sun garuu haalota tokko toktoof mijataa ta'uu dhiisuu danda'a. Kanaaf sanarra immoo guyyuma wal agarru sana bifa hoo'aa, jaalala, tokkummaa, walhubachuu fi walirraa barachuu qabuun wal agarree osoo guyyaa gaarii obboloota keenya waliin dabarsinee hawwii kiyya. Yemmuun akkas jedhu namoonni hedduun hawwii akkasii akka qaban nan beeka. Garuu namoonni muraasni akkas jechaa tilmaama isaanii dhiyeessu 'yoon achi dhaqes yoon hafes wanti naaf dabalamu hin jiru waanuma beekamaa haasa'aa oolu kanaaf dhaquun na hin barbaachisu' namni jedhu hin dhabamu; sun garuu xiqqeenya namichaati. Dhugaa koon jedha: namni kun garuma fuulduraatti hawaasa tokko uumee wajjin jiraachuu hin danda'u, hawaasummaan immoo jireenyaf furtuudha. Kanaaf bakka kamittuu namaan walitti dhufeenya gaarii qabaadhaa, waliin jiraadha — kun dhaamsa koodha.",
+    message:
+      "Dhugumaan obboloota jaalala qaban giddu jiraachun akka nama gammachiisu ija koon argeera, adda baasee hubadheera. Kanaaf, jaalala jechuun obboloota keef jiraachudha! Ani ergan guyyaa gamtaa kanatti dabalamee kaasee baay'ee gammadaadha. Waan hedduus hubadheera, dhuguma dubbachuuf akka yaada kootti guyyaa guyyaan osoon obboloota koo waliin wal argee baay'ee natti tola, hedduus na gammachiisa. Ta'us sun garuu haalota tokko toktoof mijataa ta'uu dhiisuu danda'a. Kanaaf sanarra immoo guyyuma wal agarru sana bifa hoo'aa, jaalala, tokkummaa, walhubachuu fi walirraa barachuu qabuun wal agarree osoo guyyaa gaarii obboloota keenya waliin dabarsinee hawwii kiyya. Yemmuun akkas jedhu namoonni hedduun hawwii akkasii akka qaban nan beeka. Garuu namoonni muraasni akkas jechaa tilmaama isaanii dhiyeessu 'yoon achi dhaqes yoon hafes wanti naaf dabalamu hin jiru waanuma beekamaa haasa'aa oolu kanaaf dhaquun na hin barbaachisu' namni jedhu hin dhabamu; sun garuu xiqqeenya namichaati. Dhugaa koon jedha: namni kun garuma fuulduraatti hawaasa tokko uumee wajjin jiraachuu hin danda'u, hawaasummaan immoo jireenyaf furtuudha. Kanaaf bakka kamittuu namaan walitti dhufeenya gaarii qabaadhaa, waliin jiraadha — kun dhaamsa koodha.",
     bio: "Ani maqaan koo Tolasaa Tasfaayee Addunyaan jedhama. Gabaabsuuf ammoo Tolman yoo naan jettan natti tola. Kanan dhaladhe Aanaa Ada'aa Bargaa ganda Ejeree Naga'oo iddoo addaa Corrisee jedhamtuuttidha. Anis barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe, akkasumas Haramaayaa Yuunivarsiititti barataa Software Engineering waggaa 3ffaati. Dabalataanis, gamtaa barattoota Ada'aa Bargaa keessatti bara 2017 walitti qabaa ta'ee tajaajileera. Naannoo baruu yoo barbaaddan karaa lakkofsa bilbilaa +251975863448 na qunnamuu dandeessu yookin karaa email tolesatesfaye27@gmail.com.",
   },
   {
@@ -99,7 +104,8 @@ export const students: Student[] = [
     email: "hbirhaanuu@gmail.com",
     entry: "2016",
     role: "Barreessaa",
-    message: "Ani maqaan koo Haacaaluu Birhaanuun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuuttidha. Barnoota koo mana barumsaa Inchinnii sadarkaa lammaffaatti baradhe. Haramayaa Yuunivarsiititti barataa Electrical and Computer Engineering waggaa 2ffaati. Dabalataanis gamtaa barattoota Ada'a Bargaa keessatti bara 2017 akka barreessatti tajaajileera.",
+    message:
+      "Ani maqaan koo Haacaaluu Birhaanuun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuuttidha. Barnoota koo mana barumsaa Inchinnii sadarkaa lammaffaatti baradhe. Haramayaa Yuunivarsiititti barataa Electrical and Computer Engineering waggaa 2ffaati. Dabalataanis gamtaa barattoota Ada'a Bargaa keessatti bara 2017 akka barreessatti tajaajileera.",
     bio: "Ani maqaan koo Haacaaluu Birhaanuun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuuttidha. Barnoota koo mana barumsaa Inchinnii sadarkaa lammaffaatti baradhe. Haramayaa Yuunivarsiititti barataa Electrical and Computer Engineering waggaa 2ffaati. Dabalataanis gamtaa barattoota Ada'a Bargaa keessatti bara 2017 akka barreessatti tajaajileera. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251923795979 yookin karaa email hbirhaanuu@gmail.com.",
   },
   {
@@ -114,7 +120,8 @@ export const students: Student[] = [
     email: "abaychala49@gmail.com",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Abbay Caalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ulaa Goraatti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Software Engineering waggaa 1ffaati. Anis batch bara 2017ti.",
+    message:
+      "Ani maqaan koo Abbay Caalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ulaa Goraatti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Software Engineering waggaa 1ffaati. Anis batch bara 2017ti.",
     bio: "Ani maqaan koo Abbay Caalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ulaa Goraatti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Software Engineering waggaa 1ffaati. Anis batch bara 2017ti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251949324128 yookin karaa email abaychala49@gmail.com.",
   },
   {
@@ -128,7 +135,8 @@ export const students: Student[] = [
     phone: "+251949324128",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Milkeessa jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugaritti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Medical Laboratory waggaa 1ffaati. Anis batch bara 2017ti.",
+    message:
+      "Ani maqaan koo Milkeessa jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugaritti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Medical Laboratory waggaa 1ffaati. Anis batch bara 2017ti.",
     bio: "Ani maqaan koo Milkeessa jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugaritti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Medical Laboratory waggaa 1ffaati. Anis batch bara 2017ti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251949324128.",
   },
   {
@@ -142,7 +150,8 @@ export const students: Student[] = [
     phone: "+251956615900",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Girmaa Tikseen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ulaa Goraatti. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Economics waggaa 2ffaati. Anis batch bara 2016ti.",
+    message:
+      "Ani maqaan koo Girmaa Tikseen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ulaa Goraatti. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Economics waggaa 2ffaati. Anis batch bara 2016ti.",
     bio: "Ani maqaan koo Girmaa Tikseen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ulaa Goraatti. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Economics waggaa 2ffaati. Anis batch bara 2016ti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251956615900.",
   },
   {
@@ -156,7 +165,8 @@ export const students: Student[] = [
     phone: "+251992096050",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Ayyaantu jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barattu haaraa social science waggaa jalqabaati. Anis batch bara 2017ti.",
+    message:
+      "Ani maqaan koo Ayyaantu jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barattu haaraa social science waggaa jalqabaati. Anis batch bara 2017ti.",
     bio: "Ani maqaan koo Ayyaantu jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barattu haaraa Social Science waggaa jalqabaati. Anis batch bara 2017ti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251992096050.",
   },
   {
@@ -170,7 +180,8 @@ export const students: Student[] = [
     phone: "+251914231118",
     entry: "2015",
     role: "Miseensa",
-    message: "Ani maqaan koo Tesafaye Abeeben jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Sanbarrootti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Pharmacy waggaa 2ffaati. Anis batch bara 2015ti.",
+    message:
+      "Ani maqaan koo Tesafaye Abeeben jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Sanbarrootti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Pharmacy waggaa 2ffaati. Anis batch bara 2015ti.",
     bio: "Ani maqaan koo Tesafaye Abeeben jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Sanbarrootti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Pharmacy waggaa 2ffaati. Anis batch bara 2015ti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251914231118.",
   },
   {
@@ -184,7 +195,8 @@ export const students: Student[] = [
     phone: "+251913884804",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Seefuu Urgeen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Mechanical Engineering waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Seefuu Urgeen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Mechanical Engineering waggaa 2ffaati.",
     bio: "Ani maqaan koo Seefuu Urgeen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Mechanical Engineering waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251913884804.",
   },
   {
@@ -198,7 +210,8 @@ export const students: Student[] = [
     phone: "+251970954616",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Abdii Addunyaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Civil Engineering waggaa 1ffaati.",
+    message:
+      "Ani maqaan koo Abdii Addunyaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Civil Engineering waggaa 1ffaati.",
     bio: "Ani maqaan koo Abdii Addunyaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Civil Engineering waggaa 1ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251970954616.",
   },
   {
@@ -213,7 +226,8 @@ export const students: Student[] = [
     email: "birhanutolcha627@gmail.com",
     entry: "2015",
     role: "Miseensa",
-    message: "Ani maqaan koo Birhaanuu Tolchaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Caancoo Birrattee jedhamuti. Mana barumsaa Reejjii sadarkaa 2ffaatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Medical Laboratory waggaa 2ffaati. Anis batch bara 2015ti.",
+    message:
+      "Ani maqaan koo Birhaanuu Tolchaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Caancoo Birrattee jedhamuti. Mana barumsaa Reejjii sadarkaa 2ffaatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Medical Laboratory waggaa 2ffaati. Anis batch bara 2015ti.",
     bio: "Ani maqaan koo Birhaanuu Tolchaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Caancoo Birrattee jedhamuti. Mana barumsaa Reejjii sadarkaa 2ffaatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Medical Laboratory waggaa 2ffaati. Anis batch bara 2015ti. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251940041316 yookin karaa email birhanutolcha627@gmail.com.",
   },
   {
@@ -227,7 +241,8 @@ export const students: Student[] = [
     phone: "+251910902530",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Koomartisiin Tseggayeen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa afaan Ingiliffaa waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Koomartisiin Tseggayeen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa afaan Ingiliffaa waggaa 2ffaati.",
     bio: "Ani maqaan koo Koomartisiin Tseggayeen jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Afaan Ingiliffaa waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251910902530.",
   },
   {
@@ -242,7 +257,8 @@ export const students: Student[] = [
     email: "berhanugeleta4@gmail.com",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Birhaanuu Galataan jedhama. Kanan dhaladhe Aanaa Meettaa Wal Qixxee iddoo Dhalata jedhamutti yoo ta'u, barnoota koo sadarkaa lammaffaa magaalaa Mugar mana barumsa Reejjiittin baradhe. Amma barataa Yuunivarsiitii Haramaayaa Muummee Elektirikaalii fi Kompiitar Injinaringii waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Birhaanuu Galataan jedhama. Kanan dhaladhe Aanaa Meettaa Wal Qixxee iddoo Dhalata jedhamutti yoo ta'u, barnoota koo sadarkaa lammaffaa magaalaa Mugar mana barumsa Reejjiittin baradhe. Amma barataa Yuunivarsiitii Haramaayaa Muummee Elektirikaalii fi Kompiitar Injinaringii waggaa 2ffaati.",
     bio: "Ani maqaan koo Birhaanuu Galataan jedhama. Kanan dhaladhe Aanaa Meettaa Wal Qixxee iddoo Dhalata jedhamutti yoo ta'u, barnoota koo sadarkaa lammaffaa magaalaa Mugar mana barumsa Reejjiittin baradhe. Amma barataa Yuunivarsiitii Haramaayaa Muummee Elektirikaalii fi Kompiitar Injinaringii waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251912720271 yookin karaa email berhanugeleta4@gmail.com.",
   },
   {
@@ -257,7 +273,8 @@ export const students: Student[] = [
     telegram: "@dula_aj",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Duulaa Ajjamaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Accounting waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Duulaa Ajjamaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Accounting waggaa 2ffaati.",
     bio: "Ani maqaan koo Duulaa Ajjamaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Accounting waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251914411496 yookin karaa Telegram @dula_aj.",
   },
   {
@@ -272,7 +289,8 @@ export const students: Student[] = [
     email: "bedadadabanurgi@gmail.com",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Badhaadhaa Dhaabaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Warra Iluu Daansee jedhamuuttidha. Imala barnoota keessattii mana barumsa sadarkaa 1ffaa M/B Andoodee fi M/B Reejjii sadarkaa 2ffaatti barate. Yeroo ammaa Yuunivarsiitii Haramayaaatti barataa PADM waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Badhaadhaa Dhaabaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Warra Iluu Daansee jedhamuuttidha. Imala barnoota keessattii mana barumsa sadarkaa 1ffaa M/B Andoodee fi M/B Reejjii sadarkaa 2ffaatti barate. Yeroo ammaa Yuunivarsiitii Haramayaaatti barataa PADM waggaa 2ffaati.",
     bio: "Ani maqaan koo Badhaadhaa Dhaabaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Warra Iluu Daansee jedhamuuttidha. Imala barnoota keessattii mana barumsa sadarkaa 1ffaa M/B Andoodee fi M/B Reejjii sadarkaa 2ffaatti barate. Yeroo ammaa Yuunivarsiitii Haramayaaatti barataa PADM waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa 0952655925 yookin karaa email bedadadabanurgi@gmail.com.",
   },
   {
@@ -286,7 +304,8 @@ export const students: Student[] = [
     phone: "+251935888729",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Naafyad Taammiruun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Kittoo jedhamtuutidha. Barnoota koo mana barumsaa Hoolata sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa haaraadha (freshman).",
+    message:
+      "Ani maqaan koo Naafyad Taammiruun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Kittoo jedhamtuutidha. Barnoota koo mana barumsaa Hoolata sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa haaraadha (freshman).",
     bio: "Ani maqaan koo Naafyad Taammiruun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Kittoo jedhamtuuttidha. Barnoota koo mana barumsaa Hoolata sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa haaraadha (freshman). Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251935888729.",
   },
   {
@@ -300,7 +319,8 @@ export const students: Student[] = [
     phone: "+251921323185",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Waasihun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Information Technology waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Waasihun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Information Technology waggaa 2ffaati.",
     bio: "Ani maqaan koo Waasihun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Information Technology waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251921323185.",
   },
   {
@@ -314,7 +334,8 @@ export const students: Student[] = [
     phone: "+251929979613",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Abdisa Caalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa haaraadha (freshman).",
+    message:
+      "Ani maqaan koo Abdisa Caalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa haaraadha (freshman).",
     bio: "Ani maqaan koo Abdisa Caalaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa haaraadha (freshman). Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251929979613.",
   },
   {
@@ -328,7 +349,8 @@ export const students: Student[] = [
     phone: "+251921710522",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Balaayi jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugaritti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Electrical and Computer Engineering waggaa 1ffaati.",
+    message:
+      "Ani maqaan koo Balaayi jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugaritti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Electrical and Computer Engineering waggaa 1ffaati.",
     bio: "Ani maqaan koo Balaayi jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugaritti. Mana barumsaa Reejjii sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa Electrical and Computer Engineering waggaa 1ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251921710522.",
   },
   {
@@ -342,7 +364,8 @@ export const students: Student[] = [
     phone: "+251929147463",
     entry: "2017",
     role: "Miseensa",
-    message: "Ani maqaan koo Girma Eejersaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa haaraadha (freshman).",
+    message:
+      "Ani maqaan koo Girma Eejersaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa haaraadha (freshman).",
     bio: "Ani maqaan koo Girma Eejersaan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Mugarittidha. Mana barumsaa Mugher Community sadarkaa 2ffatti baradhe. Amma Haramayaa Yuunivarsiititti barataa haaraadha (freshman). Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251929147463.",
   },
   {
@@ -356,7 +379,8 @@ export const students: Student[] = [
     phone: "+251912401668",
     entry: "2015",
     role: "Miseensa",
-    message: "Hunda dura Waaqayyoof galanni haa ta'u! Maqaan koo Tolasaa Kabbadaan jedhama. Kanan dhaladhe Aanaa Ada'aa Bargaa ganda Ejeree Nagawoo keessattidha. Barnoota koo M/B Incinnii sad.2ffaattin baradhe. Yeroo jalqabaaf Yuunivarsiititti qorumsa kennameen sagantaa fooyya'insaatiin bara 2015 ALItti Ministeera Barnootaatiin gara Yuunivarsiitii Haramaayaatti ramadame.",
+    message:
+      "Hunda dura Waaqayyoof galanni haa ta'u! Maqaan koo Tolasaa Kabbadaan jedhama. Kanan dhaladhe Aanaa Ada'aa Bargaa ganda Ejeree Nagawoo keessattidha. Barnoota koo M/B Incinnii sad.2ffaattin baradhe. Yeroo jalqabaaf Yuunivarsiititti qorumsa kennameen sagantaa fooyya'insaatiin bara 2015 ALItti Ministeera Barnootaatiin gara Yuunivarsiitii Haramaayaatti ramadame.",
     bio: "Ani maqaan koo Tolasaa Kabbadaan jedhama. Kanan dhaladhe Aanaa Ada'aa Bargaa ganda Ejeree Nagawoo keessattidha. Barnoota koo mana barumsaa Incinnii sadarkaa 2ffaattin baradhe. Yeroo jalqabaaf Yuunivarsiititti qorumsa kennameen sagantaa fooyya'insaatiin bara 2015 ALItti Ministeera Barnootaatiin gara Yuunivarsiitii Haramaayaatti ramadame. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251912401668.",
   },
   {
@@ -370,7 +394,8 @@ export const students: Student[] = [
     phone: "+251913884804",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Phiini'eel jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuutidha. Barnoota koo mana barumsaa Mugher Community sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Software Engineering waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Phiini'eel jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuutidha. Barnoota koo mana barumsaa Mugher Community sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Software Engineering waggaa 2ffaati.",
     bio: "Ani maqaan koo Phiini'eel jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuuttidha. Barnoota koo mana barumsaa Mugher Community sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Software Engineering waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251913884804.",
   },
   {
@@ -384,7 +409,8 @@ export const students: Student[] = [
     phone: "+251951751066",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Istagannat jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Accounting waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Istagannat jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Accounting waggaa 2ffaati.",
     bio: "Ani maqaan koo Istagannat jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa magaalaa Incinnittidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Accounting waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251951751066.",
   },
   {
@@ -398,7 +424,8 @@ export const students: Student[] = [
     phone: "+251935914102",
     entry: "2017",
     role: "Miseensa",
-    message: "Duraan dursee Waaqa akkan jiraadhufis akka fedha isaatti eeyyama naaf kennee na jiraachiseef galanni yaa ta'u. Ani maqaan koo Baay'isaa Birhaanuun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Nagawoo jedhamutti. Barumsaa koo mana barumsaa Incinnii sadarkaa 2ffaattin baradhe. Qabxiin darbiinsaa naaf deebi'ee eeyyama Waaqayyootin bara 2017tti Yuunivarsiitii Haramaayaa keessattin barachaa jira.",
+    message:
+      "Duraan dursee Waaqa akkan jiraadhufis akka fedha isaatti eeyyama naaf kennee na jiraachiseef galanni yaa ta'u. Ani maqaan koo Baay'isaa Birhaanuun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Nagawoo jedhamutti. Barumsaa koo mana barumsaa Incinnii sadarkaa 2ffaattin baradhe. Qabxiin darbiinsaa naaf deebi'ee eeyyama Waaqayyootin bara 2017tti Yuunivarsiitii Haramaayaa keessattin barachaa jira.",
     bio: "Ani maqaan koo Baay'isaa Birhaanuun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Nagawoo jedhamutti. Barumsaa koo mana barumsaa Incinnii sadarkaa 2ffaattin baradhe. Qabxiin darbiinsaa naaf deebi'ee eeyyama Waaqayyootin bara 2017tti Yuunivarsiitii Haramaayaa keessattin barachaa jira. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251935914102.",
   },
   {
@@ -412,7 +439,8 @@ export const students: Student[] = [
     phone: "+251914462295",
     entry: "2016",
     role: "Miseensa",
-    message: "Ani maqaan koo Koomartisiin Seifun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuutidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Economics waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Koomartisiin Seifun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuutidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Economics waggaa 2ffaati.",
     bio: "Ani maqaan koo Koomartisiin Seifun jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuuttidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Economics waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251914462295.",
   },
   {
@@ -426,7 +454,8 @@ export const students: Student[] = [
     phone: "+251937755011",
     entry: "2015",
     role: "Miseensa",
-    message: "Ani maqaan koo Tesfaye Mulgeetan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuutidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Educational Planning waggaa 2ffaati.",
+    message:
+      "Ani maqaan koo Tesfaye Mulgeetan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuutidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Educational Planning waggaa 2ffaati.",
     bio: "Ani maqaan koo Tesfaye Mulgeetan jedhama. Kanan dhaladhe Aanaa Ada'a Bargaa ganda Ejeree Naga'oo jedhamtuuttidha. Barnoota koo mana barumsaa Inchinni sadarkaa lammaffattin baradhe. Haramayaa Yuunivarsiititti barataa Educational Planning waggaa 2ffaati. Na qunnamuu yoo barbaaddan karaa lakkoofsa bilbilaa +251937755011.",
   },
   {

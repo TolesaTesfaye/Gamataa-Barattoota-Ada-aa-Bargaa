@@ -25,7 +25,7 @@ export default function Notifications() {
       setNotifications(response.data);
     } catch (err: any) {
       setError(
-        err.response?.data?.message || "Failed to fetch notifications"
+        err.response?.data?.message || "Beeksisota fudhachuu hin dandeenye"
       );
     } finally {
       setLoading(false);
@@ -55,7 +55,7 @@ export default function Notifications() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Delete this notification?")) return;
+    if (!window.confirm("Beeksisa kana haquu?")) return;
     try {
       await apiClient.delete(`/notifications/${id}`);
       setNotifications((prev) => prev.filter((n) => n._id !== id));
@@ -87,16 +87,16 @@ export default function Notifications() {
     const now = new Date();
     const then = new Date(date);
     const diff = Math.floor((now.getTime() - then.getTime()) / 1000);
-    if (diff < 60) return "just now";
-    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-    return `${Math.floor(diff / 86400)}d ago`;
+    if (diff < 60) return "amma";
+    if (diff < 3600) return `${Math.floor(diff / 60)}dak. dura`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}sa'at. dura`;
+    return `${Math.floor(diff / 86400)}guyy. dura`;
   };
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   if (loading) {
-    return <div className="text-center py-12">Loading notifications...</div>;
+    return <div className="text-center py-12">Beeksisota fe'aa jira...</div>;
   }
 
   if (error) {
@@ -110,19 +110,19 @@ export default function Notifications() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-4xl font-bold text-primary">Notifications</h1>
+        <h1 className="text-4xl font-bold text-primary">Beeksisota</h1>
         {unreadCount > 0 && (
           <button
             onClick={handleMarkAllRead}
             className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition"
           >
-            Mark All as Read ({unreadCount})
+            Hunda Kan Dubbifame gochuu ({unreadCount})
           </button>
         )}
       </div>
 
       {notifications.length === 0 ? (
-        <p className="text-gray-600">No notifications yet.</p>
+        <p className="text-gray-600">Beeksi hin jiru.</p>
       ) : (
         <div className="space-y-3">
           {notifications.map((notification) => (
@@ -163,7 +163,7 @@ export default function Notifications() {
                   handleDelete(notification._id);
                 }}
                 className="text-red-500 hover:text-red-700 transition"
-                title="Delete"
+                title="Haqi"
               >
                 ✕
               </button>

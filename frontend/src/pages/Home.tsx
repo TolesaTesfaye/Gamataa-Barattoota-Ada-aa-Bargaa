@@ -318,7 +318,7 @@ export default function Home() {
               to="/waaee"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-blue-600 dark:bg-gray-900 dark:text-blue-400 font-semibold rounded-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
-              Go to Dashboard
+              Gamoo Deemi
               <svg
                 className="w-5 h-5"
                 fill="none"

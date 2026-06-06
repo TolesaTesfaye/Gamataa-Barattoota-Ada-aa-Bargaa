@@ -6,7 +6,7 @@ interface NewsItem {
   _id: string;
   title: string;
   content: string;
-  author: any;
+  author: { firstName?: string; lastName?: string };
   category: string;
   views: number;
   publishedAt: string;
@@ -14,6 +14,14 @@ interface NewsItem {
 }
 
 const categories = ["all", "news", "article", "press release", "blog"];
+
+const categoryLabels: Record<string, string> = {
+  all: "Hunda",
+  news: "Oduu",
+  article: "Maree",
+  "press release": "Ibsa Sirnaa",
+  blog: "Blogii",
+};
 
 const categoryColors: Record<string, string> = {
   news: "bg-blue-500/20 text-blue-400 border-blue-500/30",
@@ -51,8 +59,11 @@ export default function News() {
       try {
         const response = await apiClient.get("/news");
         setNews(response.data);
-      } catch (err: any) {
-        setError(err.response?.data?.message || "Failed to fetch news");
+      } catch (err: unknown) {
+        const error = err as { response?: { data?: { message?: string } } };
+        setError(
+          error.response?.data?.message || "Oduu fudhachuu hin dandeenye",
+        );
       } finally {
         setLoading(false);
       }
@@ -72,7 +83,7 @@ export default function News() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <div>
-        <h1 className="text-4xl font-bold text-white">News & Updates</h1>
+        <h1 className="text-4xl font-bold text-white">Oduu fi Obboleettii</h1>
         <div className="mt-2 h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
       </div>
 
@@ -88,18 +99,28 @@ export default function News() {
                   : "text-gray-400 hover:text-white hover:bg-gray-700/50"
               }`}
             >
-              {cat}
+              {categoryLabels[cat] || cat}
             </button>
           ))}
         </div>
 
         <div className="relative">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <svg
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
           <input
             type="text"
-            placeholder="Search news..."
+            placeholder="Oduu barbaadi..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-10 pr-4 py-2 bg-gray-800/60 border border-gray-700/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 w-full sm:w-64"
@@ -109,14 +130,26 @@ export default function News() {
 
       {loading && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
         </div>
       )}
 
       {error && (
         <div className="bg-red-900/30 border border-red-500/30 text-red-400 px-5 py-4 rounded-xl flex items-center gap-3">
-          <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            className="w-5 h-5 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
           <span>{error}</span>
         </div>
@@ -124,11 +157,23 @@ export default function News() {
 
       {!loading && !error && filtered.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 text-gray-500">
-          <svg className="w-16 h-16 mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          <svg
+            className="w-16 h-16 mb-4 text-gray-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+            />
           </svg>
-          <p className="text-lg font-medium">No news found</p>
-          <p className="text-sm text-gray-600 mt-1">Try adjusting your search or filter</p>
+          <p className="text-lg font-medium">Oduun hin argamne</p>
+          <p className="text-sm text-gray-600 mt-1">
+            Barbaaduu fi geengoo kee fooyyessi
+          </p>
         </div>
       )}
 
@@ -136,7 +181,8 @@ export default function News() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((item) => {
             const catColor =
-              categoryColors[item.category?.toLowerCase()] || "bg-gray-500/20 text-gray-400 border-gray-500/30";
+              categoryColors[item.category?.toLowerCase()] ||
+              "bg-gray-500/20 text-gray-400 border-gray-500/30";
             return (
               <Link
                 key={item._id}
@@ -151,14 +197,26 @@ export default function News() {
                   />
                 ) : (
                   <div className="w-full aspect-[16/9] bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
-                    <svg className="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    <svg
+                      className="w-12 h-12 text-gray-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                      />
                     </svg>
                   </div>
                 )}
 
                 <div className="p-5 space-y-3">
-                  <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium border ${catColor}`}>
+                  <span
+                    className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium border ${catColor}`}
+                  >
                     {item.category}
                   </span>
 
@@ -167,16 +225,24 @@ export default function News() {
                   </h3>
 
                   <div className="flex items-center gap-3 text-sm text-gray-500">
-                    <span>By {item.author?.firstName || "Unknown"}</span>
+                    <span>
+                      Barreessaa:{" "}
+                      {typeof item.author === "object"
+                        ? item.author?.firstName || "Hin beekkamne"
+                        : item.author || "Hin beekkamne"}
+                    </span>
                     <span className="w-1 h-1 rounded-full bg-gray-600" />
                     <span>
                       {item.publishedAt
-                        ? new Date(item.publishedAt).toLocaleDateString("en-GB", {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          })
-                        : "Draft"}
+                        ? new Date(item.publishedAt).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            },
+                          )
+                        : "Dhaamsa"}
                     </span>
                   </div>
 
@@ -185,9 +251,19 @@ export default function News() {
                   </p>
 
                   <span className="inline-flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:text-blue-300 transition-colors">
-                    Read More
-                    <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    Dubbisa
+                    <svg
+                      className="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </span>
                 </div>

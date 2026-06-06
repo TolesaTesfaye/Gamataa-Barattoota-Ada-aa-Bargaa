@@ -5,6 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useAuthStore } from "./store/authStore";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import Layout from "./components/Layout";
 import PublicLanding from "./pages/PublicLanding";
 import Home from "./pages/Home";
@@ -48,14 +49,17 @@ import AdminDocuments from "./pages/AdminDocuments";
 import AdminAlumni from "./pages/AdminAlumni";
 import AdminOpportunities from "./pages/AdminOpportunities";
 import AdminContact from "./pages/AdminContact";
+import AdminStudents from "./pages/AdminStudents";
 
 const ADMIN_ROLES = ["superadmin", "admin"];
 
 function App() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </LanguageProvider>
   );
 }
 
@@ -211,6 +215,14 @@ function AppRoutes() {
             <AdminRoute>
               <AdminContact />
             </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/students"
+          element={
+            <SuperAdminRoute>
+              <AdminStudents />
+            </SuperAdminRoute>
           }
         />
 

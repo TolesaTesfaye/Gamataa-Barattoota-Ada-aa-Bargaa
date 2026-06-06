@@ -2,27 +2,50 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
-function getPasswordStrength(password: string): { label: string; color: string; width: string; textColor: string } {
+function getPasswordStrength(password: string): {
+  label: string;
+  color: string;
+  width: string;
+  textColor: string;
+} {
   if (!password) return { label: "", color: "", width: "0%", textColor: "" };
   const hasLower = /[a-z]/.test(password);
   const hasUpper = /[A-Z]/.test(password);
   const hasDigit = /\d/.test(password);
   const hasSpecial = /[^a-zA-Z0-9]/.test(password);
-  const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(Boolean).length;
+  const score = [hasLower, hasUpper, hasDigit, hasSpecial].filter(
+    Boolean,
+  ).length;
 
   if (password.length < 8 || score < 2) {
-    return { label: "Weak", color: "bg-yellow-500 dark:bg-yellow-400", width: "33%", textColor: "text-yellow-600 dark:text-yellow-400" };
+    return {
+      label: "Weak",
+      color: "bg-yellow-500 dark:bg-yellow-400",
+      width: "33%",
+      textColor: "text-yellow-600 dark:text-yellow-400",
+    };
   }
   if (score < 4) {
-    return { label: "Medium", color: "bg-orange-500 dark:bg-orange-400", width: "66%", textColor: "text-orange-600 dark:text-orange-400" };
+    return {
+      label: "Medium",
+      color: "bg-orange-500 dark:bg-orange-400",
+      width: "66%",
+      textColor: "text-orange-600 dark:text-orange-400",
+    };
   }
-  return { label: "Strong", color: "bg-green-500 dark:bg-green-400", width: "100%", textColor: "text-green-600 dark:text-green-400" };
+  return {
+    label: "Strong",
+    color: "bg-green-500 dark:bg-green-400",
+    width: "100%",
+    textColor: "text-green-600 dark:text-green-400",
+  };
 }
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -69,7 +92,7 @@ export default function Register() {
     if (!validateForm()) return;
 
     try {
-      await register(email, password, firstName, lastName);
+      await register(email, password, firstName, lastName, phone);
       navigate("/dashboard");
     } catch {
       // handled by store
@@ -86,21 +109,52 @@ export default function Register() {
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-2xl rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.3)] border border-white/50 dark:border-gray-700/50 p-8 sm:p-10 transition-all duration-300">
           <div className="text-center mb-8">
             <Link to="/" className="inline-flex items-center gap-3 mb-6 group">
-              <img src="/asset/Picture1.png" alt="GBAABW" className="h-12 w-12 rounded-full ring-2 ring-blue-500/20 group-hover:ring-blue-500/40 transition-all" />
+              <img
+                src="/asset/Picture1.png"
+                alt="GBAABW"
+                className="h-12 w-12 rounded-full ring-2 ring-blue-500/20 group-hover:ring-blue-500/40 transition-all"
+              />
             </Link>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Create Account</h2>
-            <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm sm:text-base">Join the GBAABW community</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+              Create Account
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm sm:text-base">
+              Join the GBAABW community
+            </p>
           </div>
 
           {error && (
             <div className="mb-6 flex items-center gap-3 bg-red-50/80 dark:bg-red-900/30 backdrop-blur-sm border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-xl text-sm">
-              <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-5 h-5 flex-shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span className="flex-1">{error}</span>
-              <button onClick={clearError} className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-200 transition-colors">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <button
+                onClick={clearError}
+                className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-200 transition-colors"
+              >
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -109,7 +163,9 @@ export default function Register() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">First Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  First Name
+                </label>
                 <input
                   type="text"
                   value={firstName}
@@ -120,7 +176,9 @@ export default function Register() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Last Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   value={lastName}
@@ -133,36 +191,103 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email Address</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Phone Number
+              </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <svg
+                    className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50/50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-400/50 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200"
+                  placeholder="+251912345678"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Email Address
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
                   </svg>
                 </div>
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => { setEmail(e.target.value); setEmailError(""); clearError(); }}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError("");
+                    clearError();
+                  }}
                   className={`w-full pl-11 pr-4 py-3 bg-gray-50/50 dark:bg-gray-700/30 border ${emailError ? "border-red-400 dark:border-red-500" : "border-gray-200 dark:border-gray-600"} rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-400/50 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200`}
                   placeholder="your@email.com"
                 />
               </div>
-              {emailError && <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">{emailError}</p>}
+              {emailError && (
+                <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">
+                  {emailError}
+                </p>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Password
+              </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <svg
+                    className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
                   </svg>
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) => { setPassword(e.target.value); setPasswordError(""); clearError(); }}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError("");
+                    clearError();
+                  }}
                   className={`w-full pl-11 pr-12 py-3 bg-gray-50/50 dark:bg-gray-700/30 border ${passwordError ? "border-red-400 dark:border-red-500" : "border-gray-200 dark:border-gray-600"} rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-400/50 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200`}
                   placeholder="Create a strong password"
                 />
@@ -172,13 +297,37 @@ export default function Register() {
                   className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
                   {showPassword ? (
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    <svg
+                      className="w-5 h-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      />
                     </svg>
                   ) : (
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    <svg
+                      className="w-5 h-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
                     </svg>
                   )}
                 </button>
@@ -186,20 +335,43 @@ export default function Register() {
               {password && (
                 <div className="mt-2">
                   <div className="flex gap-1 h-1.5 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
-                    <div className={`${strength.color} transition-all duration-300 rounded-full`} style={{ width: strength.width }} />
+                    <div
+                      className={`${strength.color} transition-all duration-300 rounded-full`}
+                      style={{ width: strength.width }}
+                    />
                   </div>
-                  <p className={`mt-1 text-xs font-medium ${strength.textColor}`}>{strength.label}</p>
+                  <p
+                    className={`mt-1 text-xs font-medium ${strength.textColor}`}
+                  >
+                    {strength.label}
+                  </p>
                 </div>
               )}
-              {passwordError && <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">{passwordError}</p>}
+              {passwordError && (
+                <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">
+                  {passwordError}
+                </p>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Confirm Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Confirm Password
+              </label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <svg
+                    className="w-5 h-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
                   </svg>
                 </div>
                 <input
@@ -207,7 +379,9 @@ export default function Register() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className={`w-full pl-11 pr-12 py-3 bg-gray-50/50 dark:bg-gray-700/30 border rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-400/50 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200 ${
-                    confirmPassword && !passwordsMatch ? "border-red-400 dark:border-red-500" : "border-gray-200 dark:border-gray-600"
+                    confirmPassword && !passwordsMatch
+                      ? "border-red-400 dark:border-red-500"
+                      : "border-gray-200 dark:border-gray-600"
                   }`}
                   placeholder="Re-enter your password"
                 />
@@ -217,19 +391,45 @@ export default function Register() {
                   className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
                   {showConfirmPassword ? (
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    <svg
+                      className="w-5 h-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      />
                     </svg>
                   ) : (
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    <svg
+                      className="w-5 h-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
                     </svg>
                   )}
                 </button>
               </div>
               {confirmPassword && !passwordsMatch && (
-                <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">Passwords do not match</p>
+                <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">
+                  Passwords do not match
+                </p>
               )}
             </div>
 
@@ -241,11 +441,24 @@ export default function Register() {
                 onChange={(e) => setAgreeTerms(e.target.checked)}
                 className="mt-1 h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-400 bg-gray-50 dark:bg-gray-700"
               />
-              <label htmlFor="terms" className="text-sm text-gray-500 dark:text-gray-400">
+              <label
+                htmlFor="terms"
+                className="text-sm text-gray-500 dark:text-gray-400"
+              >
                 I agree to the{" "}
-                <a href="#" className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Terms of Service</a>{" "}
+                <a
+                  href="#"
+                  className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                >
+                  Terms of Service
+                </a>{" "}
                 and{" "}
-                <a href="#" className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Privacy Policy</a>
+                <a
+                  href="#"
+                  className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                >
+                  Privacy Policy
+                </a>
               </label>
             </div>
 
@@ -256,13 +469,30 @@ export default function Register() {
             >
               {isLoading ? (
                 <>
-                  <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.963 7.963 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.963 7.963 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
                   </svg>
                   <span>Creating account...</span>
                 </>
-              ) : "Create account"}
+              ) : (
+                "Create account"
+              )}
             </button>
           </form>
 
@@ -274,7 +504,12 @@ export default function Register() {
 
           <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
             Already have an account?{" "}
-            <Link to="/login" className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">Login</Link>
+            <Link
+              to="/login"
+              className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+            >
+              Login
+            </Link>
           </p>
         </div>
       </div>

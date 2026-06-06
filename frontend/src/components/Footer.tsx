@@ -1,24 +1,26 @@
 import { Link } from "react-router-dom";
-
-const categories = [
-  { to: "/news", label: "Oduu" },
-  { to: "/events", label: "Ta'oota" },
-  { to: "/documents", label: "Barruulee" },
-  { to: "/gallery", label: "Suuraa" },
-  { to: "/faqs", label: "Gaaffilee" },
-  { to: "/resources", label: "Qabeenya" },
-];
-
-const aboutLinks = [
-  { to: "/galata", label: "Galata" },
-  { to: "/ergaa", label: "Ergaa Gabaabaa" },
-  { to: "/yaadannoo", label: "Yaadannoo" },
-  { to: "/koreewwan", label: "Koreewwan" },
-  { to: "/students", label: "Barattoota" },
-  { to: "/contact", label: "Nu Qunnami" },
-];
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const categories = [
+    { to: "/news", label: t("nav.news") },
+    { to: "/events", label: t("nav.events") },
+    { to: "/documents", label: t("nav.documents") },
+    { to: "/gallery", label: t("nav.gallery") },
+    { to: "/faqs", label: t("nav.faqs") },
+    { to: "/resources", label: t("nav.resources") },
+  ];
+
+  const aboutLinks = [
+    { to: "/galata", label: t("footer.aboutLinks.galata") },
+    { to: "/ergaa", label: t("footer.aboutLinks.ergaa") },
+    { to: "/yaadannoo", label: t("footer.aboutLinks.yaadannoo") },
+    { to: "/koreewwan", label: t("footer.aboutLinks.koreewwan") },
+    { to: "/students", label: t("footer.aboutLinks.students") },
+    { to: "/contact", label: t("footer.aboutLinks.contact") },
+  ];
   return (
     <footer className="bg-gray-900 dark:bg-gray-950 text-gray-300 border-t border-gray-800 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -28,9 +30,7 @@ export default function Footer() {
               GBAABW
             </Link>
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
-              Gamtaa Barattoota Aanaa Ada'a Bargaa Yuunivarsiitii Haramaayaa
-              keessatti barattoota walitti qabuu fi wal gargaaruu fi guddina
-              ogummaa isaanii irratti hojjata.
+              {t("footer.description")}
             </p>
             <div className="mt-5 flex items-center gap-3">
               <SocialIcon
@@ -70,7 +70,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              Qoodaa
+              {t("footer.categories")}
             </h3>
             <ul className="mt-4 space-y-2">
               {categories.map((link) => (
@@ -88,7 +88,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              Waa'ee
+              {t("footer.about")}
             </h3>
             <ul className="mt-4 space-y-2">
               {aboutLinks.map((link) => (
@@ -106,7 +106,7 @@ export default function Footer() {
 
           <div className="hidden sm:block">
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              Contact
+              {t("footer.contact")}
             </h3>
             <ul className="mt-4 space-y-3">
               <li className="flex items-start gap-2 text-sm text-gray-400">
@@ -123,7 +123,7 @@ export default function Footer() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                <span>adaabargaa@student.haramaya.edu.et</span>
+                <span>{t("footer.email")}</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-400">
                 <svg
@@ -139,7 +139,7 @@ export default function Footer() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span>+251 91 234 5678</span>
+                <span>{t("footer.phone")}</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-400">
                 <svg
@@ -162,9 +162,14 @@ export default function Footer() {
                   />
                 </svg>
                 <span>
-                  Yuunivarsiitii Haramaayaa
-                  <br />
-                  Haramaayaa, Oromiyaa, Itoophiyaa
+                  {t("footer.address")
+                    .split("\n")
+                    .map((line, i) => (
+                      <span key={i}>
+                        {i > 0 && <br />}
+                        {line}
+                      </span>
+                    ))}
                 </span>
               </li>
             </ul>
@@ -173,19 +178,18 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Gamtaa Barattoota Aanaa Ada'a
-            Bargaa. Mirgi hundi eegameera.
+            &copy; {new Date().getFullYear()} {t("footer.copyright")}
           </p>
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <Link to="/faqs" className="hover:text-primary transition-colors">
-              Imaammata Icciitii
+              {t("footer.privacy")}
             </Link>
             <span className="text-gray-700">|</span>
             <Link
               to="/contact"
               className="hover:text-primary transition-colors"
             >
-              Haala Tajaajila
+              {t("footer.terms")}
             </Link>
           </div>
         </div>
