@@ -40,12 +40,12 @@ async function seed() {
 
     // ── Admin User ─────────────────────────────────────────────
     console.log("Creating admin user...");
-    const adminPassword = await bcrypt.hash("admin123", 10);
+    const adminPassword = await bcrypt.hash("superadmin123", 10);
     const admin = await User.create({
-      email: "admin@gbaabw.com",
+      email: "gbaabsuperadmin@gmail.com",
       password: adminPassword,
-      firstName: "Admin",
-      lastName: "User",
+      firstName: "Super",
+      lastName: "Admin",
       role: "superadmin",
       isActive: true,
     });
@@ -657,7 +657,7 @@ async function seed() {
     console.log("═══════════════════════════════════════════");
     console.log("  Database seeded successfully!");
     console.log("═══════════════════════════════════════════");
-    console.log("  Superadmin: admin@gbaabw.com / admin123");
+    console.log("  Superadmin: gbaabsuperadmin@gmail.com / superadmin123");
     console.log("  Admin login: <any admin email> / member123");
     console.log("  Student login: <any student email> / member123");
     console.log("═══════════════════════════════════════════");
