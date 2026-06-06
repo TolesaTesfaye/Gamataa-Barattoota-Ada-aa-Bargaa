@@ -32,6 +32,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:5173",
   "https://gamataa-barattoota-ada-aa-bargaa.vercel.app",
   "https://gbaabw-backend.up.railway.app",
+  "https://gamataa-barattoota-ada-aa-bargaa-production.up.railway.app",
 ].filter(Boolean);
 
 app.use(
