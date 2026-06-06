@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:5173",
   "https://gamataa-barattoota-ada-aa-bargaa.vercel.app",
+  "https://gbaabw-backend.up.railway.app",
 ].filter(Boolean);
 
 app.use(
@@ -40,7 +41,8 @@ app.use(
       if (
         !origin ||
         allowedOrigins.includes(origin) ||
-        origin.endsWith(".vercel.app")
+        origin.endsWith(".vercel.app") ||
+        origin.endsWith(".up.railway.app")
       ) {
         callback(null, true);
       } else {
