@@ -80,6 +80,11 @@ app.get("/api/health", (req: Request, res: Response) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
+// Root route
+app.get("/", (req: Request, res: Response) => {
+  res.json({ message: "Welcome to GBAABW API", status: "Running" });
+});
+
 // 404 Handler
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
