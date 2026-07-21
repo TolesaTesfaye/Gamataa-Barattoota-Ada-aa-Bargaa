@@ -43,7 +43,7 @@ const upload = multer({
   },
 });
 
-// Get all public galleries
+// Get all public galleries (public)
 router.get("/", async (req: Request, res: Response) => {
   try {
     const galleries = await Gallery.find({ isPublic: true })
@@ -55,6 +55,24 @@ router.get("/", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to fetch galleries", error });
   }
 });
+
+// Get all galleries including private (admin only)
+router.get(
+  "/admin",
+  authenticate,
+  authorize(ADMIN_ROLES),
+  async (req: Request, res: Response) => {
+    try {
+      const galleries = await Gallery.find({})
+        .populate("uploadedBy", "firstName lastName")
+        .sort({ createdAt: -1 });
+
+      res.json(galleries);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch galleries", error });
+    }
+  },
+);
 
 // Get single gallery with images/videos
 router.get("/:id", async (req: Request, res: Response) => {
@@ -121,7 +139,9 @@ router.post(
 
       if (req.file) {
         // File upload via multer
-        url = `/uploads/${req.file.filename}`;
+        const protocol = req.protocol;
+        const host = req.get("host");
+        url = `${protocol}://${host}/uploads/${req.file.filename}`;
         caption = req.body.caption || "";
       } else {
         // URL input fallback
@@ -168,8 +188,10 @@ router.post(
       const captions = req.body.captions ? JSON.parse(req.body.captions) : [];
 
       files.forEach((file, index) => {
+        const protocol = req.protocol;
+        const host = req.get("host");
         gallery.images.push({
-          url: `/uploads/${file.filename}`,
+          url: `${protocol}://${host}/uploads/${file.filename}`,
           caption: captions[index] || "",
           uploadedBy: req.userId as any,
         });
