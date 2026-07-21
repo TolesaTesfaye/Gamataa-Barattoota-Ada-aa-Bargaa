@@ -1,25 +1,22 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Footer() {
-  const { t } = useLanguage();
-
   const categories = [
-    { to: "/news", label: t("nav.news") },
-    { to: "/events", label: t("nav.events") },
-    { to: "/documents", label: t("nav.documents") },
-    { to: "/gallery", label: t("nav.gallery") },
-    { to: "/faqs", label: t("nav.faqs") },
-    { to: "/resources", label: t("nav.resources") },
+    { to: "/news", label: "News" },
+    { to: "/events", label: "Events" },
+    { to: "/documents", label: "Documents" },
+    { to: "/gallery", label: "Gallery" },
+    { to: "/faqs", label: "FAQs" },
+    { to: "/resources", label: "Learning Resources" },
   ];
 
   const aboutLinks = [
-    { to: "/galata", label: t("footer.aboutLinks.galata") },
-    { to: "/ergaa", label: t("footer.aboutLinks.ergaa") },
-    { to: "/yaadannoo", label: t("footer.aboutLinks.yaadannoo") },
-    { to: "/koreewwan", label: t("footer.aboutLinks.koreewwan") },
-    { to: "/students", label: t("footer.aboutLinks.students") },
-    { to: "/contact", label: t("footer.aboutLinks.contact") },
+    { to: "/galata", label: "Thanksgiving" },
+    { to: "/ergaa", label: "Brief Message" },
+    { to: "/yaadannoo", label: "Memorial" },
+    { to: "/koreewwan", label: "Committees" },
+    { to: "/students", label: "Students" },
+    { to: "/contact", label: "Contact Us" },
   ];
   return (
     <footer className="bg-gray-900 dark:bg-gray-950 text-gray-300 border-t border-gray-800 dark:border-gray-800">
@@ -30,7 +27,8 @@ export default function Footer() {
               GBAABW
             </Link>
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
-              {t("footer.description")}
+              Gamtaa Barattoota Aanaa Ada'a Bargaa - Bringing students together
+              and supporting each other at Haramaya University
             </p>
             <div className="mt-5 flex items-center gap-3">
               <SocialIcon
@@ -70,7 +68,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              {t("footer.categories")}
+              Categories
             </h3>
             <ul className="mt-4 space-y-2">
               {categories.map((link) => (
@@ -88,7 +86,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              {t("footer.about")}
+              About
             </h3>
             <ul className="mt-4 space-y-2">
               {aboutLinks.map((link) => (
@@ -106,7 +104,7 @@ export default function Footer() {
 
           <div className="hidden sm:block">
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              {t("footer.contact")}
+              Contact
             </h3>
             <ul className="mt-4 space-y-3">
               <li className="flex items-start gap-2 text-sm text-gray-400">
@@ -123,7 +121,7 @@ export default function Footer() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                <span>{t("footer.email")}</span>
+                <span>adaabargaa@student.haramaya.edu.et</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-400">
                 <svg
@@ -139,7 +137,7 @@ export default function Footer() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span>{t("footer.phone")}</span>
+                <span>+251 91 234 5678</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-400">
                 <svg
@@ -162,14 +160,9 @@ export default function Footer() {
                   />
                 </svg>
                 <span>
-                  {t("footer.address")
-                    .split("\n")
-                    .map((line, i) => (
-                      <span key={i}>
-                        {i > 0 && <br />}
-                        {line}
-                      </span>
-                    ))}
+                  Haramaya University
+                  <br />
+                  Haramaya, Oromiya, Ethiopia
                 </span>
               </li>
             </ul>
@@ -178,18 +171,19 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} {t("footer.copyright")}
+            &copy; {new Date().getFullYear()} Gamtaa Barattoota Aanaa Ada'a
+            Bargaa. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <Link to="/faqs" className="hover:text-primary transition-colors">
-              {t("footer.privacy")}
+              Privacy Policy
             </Link>
             <span className="text-gray-700">|</span>
             <Link
               to="/contact"
               className="hover:text-primary transition-colors"
             >
-              {t("footer.terms")}
+              Terms of Service
             </Link>
           </div>
         </div>

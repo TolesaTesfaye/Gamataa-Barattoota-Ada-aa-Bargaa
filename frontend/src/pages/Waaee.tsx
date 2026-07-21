@@ -175,7 +175,7 @@ function SectionTitle({
   subsection?: string;
 }) {
   return (
-    <div className="flex items-center gap-4 mb-10" data-anim="fade-up">
+    <div className="flex items-center gap-4 mb-4" data-anim="fade-up">
       {subsection && (
         <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-100/80 dark:bg-emerald-900/40 border border-emerald-200/60 dark:border-emerald-700/30 shrink-0">
           <span className="text-sm font-bold text-emerald-700 dark:text-emerald-300">
@@ -365,7 +365,7 @@ export default function Waaee() {
         </section>
 
         {/* 1. Galata */}
-        <section id="section-1" data-section="1" className="py-10 sm:py-16">
+        <section id="section-1" data-section="1" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -429,7 +429,7 @@ export default function Waaee() {
         </section>
 
         {/* 2. Ergaa gabaabaa hangafoota irraa */}
-        <section id="section-2" data-section="2" className="py-10 sm:py-16">
+        <section id="section-2" data-section="2" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -522,7 +522,7 @@ export default function Waaee() {
         </section>
 
         {/* 3. Yaadannoo */}
-        <section id="section-3" data-section="3" className="py-10 sm:py-16">
+        <section id="section-3" data-section="3" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -570,7 +570,7 @@ export default function Waaee() {
         </section>
 
         {/* 4. Seensa */}
-        <section id="section-4" data-section="4" className="py-10 sm:py-16">
+        <section id="section-4" data-section="4" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -650,7 +650,7 @@ export default function Waaee() {
         </section>
 
         {/* 5. Seenaa Aanaa Ada'aa Bargaa */}
-        <section id="section-5" data-section="5" className="py-10 sm:py-16">
+        <section id="section-5" data-section="5" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -762,7 +762,7 @@ export default function Waaee() {
         </section>
 
         {/* 7. Kaayyoota - moved before 6 as per original order */}
-        <section id="section-7" data-section="7" className="py-10 sm:py-16">
+        <section id="section-7" data-section="7" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -810,7 +810,7 @@ export default function Waaee() {
         </section>
 
         {/* 8. Bu'aa */}
-        <section id="section-8" data-section="8" className="py-10 sm:py-16">
+        <section id="section-8" data-section="8" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -860,7 +860,7 @@ export default function Waaee() {
         </section>
 
         {/* 9. Mul'ata */}
-        <section id="section-9" data-section="9" className="py-10 sm:py-16">
+        <section id="section-9" data-section="9" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -916,7 +916,7 @@ export default function Waaee() {
         </section>
 
         {/* 10. Ittiin Bulmaata */}
-        <section id="section-10" data-section="10" className="py-10 sm:py-16">
+        <section id="section-10" data-section="10" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -1020,7 +1020,7 @@ export default function Waaee() {
         </section>
 
         {/* 11. Karoora */}
-        <section id="section-11" data-section="11" className="py-10 sm:py-16">
+        <section id="section-11" data-section="11" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -1069,7 +1069,7 @@ export default function Waaee() {
         </section>
 
         {/* 6. Suuraawwan Yaadannoof */}
-        <section id="section-6" data-section="6" className="py-10 sm:py-16">
+        <section id="section-6" data-section="6" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -1161,7 +1161,7 @@ export default function Waaee() {
         </section>
 
         {/* 12. Koree koolleejjiiwwanii fi maatii isaanii */}
-        <section id="section-12" data-section="12" className="py-10 sm:py-16">
+        <section id="section-12" data-section="12" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -1212,7 +1212,7 @@ export default function Waaee() {
         </section>
 
         {/* 13. Barattootan wal yaa barru */}
-        <section id="section-13" data-section="13" className="py-10 sm:py-16">
+        <section id="section-13" data-section="13" className="py-6 sm:py-10">
           <SectionTitle
             icon={
               <svg
@@ -1262,14 +1262,6 @@ export default function Waaee() {
         </section>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Gamtaa Barattoota Ada'aa Bargaa &copy; {new Date().getFullYear()}
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

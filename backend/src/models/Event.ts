@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IEvent extends Document {
   title: string;
@@ -10,7 +10,7 @@ export interface IEvent extends Document {
   attendees: mongoose.Types.ObjectId[];
   image: string;
   category: string;
-  status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
+  status: "upcoming" | "ongoing" | "completed" | "cancelled";
   maxAttendees: number;
   isPublic: boolean;
   createdAt: Date;
@@ -42,28 +42,37 @@ const eventSchema = new Schema<IEvent>(
     },
     organizer: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     attendees: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
     ],
     image: {
       type: String,
-      default: '',
+      default: "",
     },
     category: {
       type: String,
-      enum: ['workshop', 'meeting', 'conference', 'social', 'training', 'other'],
-      default: 'other',
+      enum: [
+        "conference",
+        "workshop",
+        "social",
+        "meeting",
+        "seminar",
+        "webinar",
+        "training",
+        "other",
+      ],
+      default: "other",
     },
     status: {
       type: String,
-      enum: ['upcoming', 'ongoing', 'completed', 'cancelled'],
-      default: 'upcoming',
+      enum: ["upcoming", "ongoing", "completed", "cancelled"],
+      default: "upcoming",
     },
     maxAttendees: {
       type: Number,
@@ -74,7 +83,7 @@ const eventSchema = new Schema<IEvent>(
       default: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const Event = mongoose.model<IEvent>('Event', eventSchema);
+export const Event = mongoose.model<IEvent>("Event", eventSchema);

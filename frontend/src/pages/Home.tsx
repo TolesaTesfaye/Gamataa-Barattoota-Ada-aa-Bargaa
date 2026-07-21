@@ -18,10 +18,10 @@ export default function Home() {
             Haramaayaa keessatti wal baruuf, wal gargaaruu fi wal jajjabeessuuf
             dhaabbatan.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up">
             <Link
               to="/waaee"
-              className="group relative inline-flex items-center gap-2 px-8 py-3.5 bg-white text-blue-600 dark:bg-gray-900 dark:text-blue-400 font-semibold rounded-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 overflow-hidden"
+              className="btn-secondary px-8 py-3.5 group"
             >
               <span className="relative z-10">Waa'ee Keenya</span>
               <svg
@@ -37,16 +37,15 @@ export default function Home() {
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </Link>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-gray-900 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 dark:from-dark-bg to-transparent"></div>
       </section>
 
       <section className="relative -mt-20 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 sm:p-8 text-center hover:shadow-2xl dark:hover:shadow-gray-900/80 hover:-translate-y-1 transition-all duration-300">
+          <div className="group glass-card rounded-2xl p-6 sm:p-8 text-center hover:-translate-y-1 transition-all duration-300">
             <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 group-hover:scale-110 transition-all duration-300">
               <svg
                 className="w-7 h-7 text-blue-600 dark:text-blue-400"
@@ -69,7 +68,7 @@ export default function Home() {
               Barattoota
             </div>
           </div>
-          <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 sm:p-8 text-center hover:shadow-2xl dark:hover:shadow-gray-900/80 hover:-translate-y-1 transition-all duration-300">
+          <div className="group glass-card rounded-2xl p-6 sm:p-8 text-center hover:-translate-y-1 transition-all duration-300">
             <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 group-hover:scale-110 transition-all duration-300">
               <svg
                 className="w-7 h-7 text-indigo-600 dark:text-indigo-400"
@@ -92,7 +91,7 @@ export default function Home() {
               Koreewwan
             </div>
           </div>
-          <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 sm:p-8 text-center hover:shadow-2xl dark:hover:shadow-gray-900/80 hover:-translate-y-1 transition-all duration-300">
+          <div className="group glass-card rounded-2xl p-6 sm:p-8 text-center hover:-translate-y-1 transition-all duration-300">
             <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center group-hover:bg-amber-100 dark:group-hover:bg-amber-900/50 group-hover:scale-110 transition-all duration-300">
               <svg
                 className="w-7 h-7 text-amber-600 dark:text-amber-400"
@@ -115,7 +114,7 @@ export default function Home() {
               Mana Barumsaa
             </div>
           </div>
-          <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 sm:p-8 text-center hover:shadow-2xl dark:hover:shadow-gray-900/80 hover:-translate-y-1 transition-all duration-300">
+          <div className="group glass-card rounded-2xl p-6 sm:p-8 text-center hover:-translate-y-1 transition-all duration-300">
             <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 group-hover:scale-110 transition-all duration-300">
               <svg
                 className="w-7 h-7 text-emerald-600 dark:text-emerald-400"
@@ -141,7 +140,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28 bg-gray-50 dark:bg-gray-900/50">
+      <section className="py-20 sm:py-28 bg-gray-50 dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -153,7 +152,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="group bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-blue-100 dark:hover:border-blue-900/50">
+            <div className="group glass-card rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 border hover:border-blue-200 dark:hover:border-blue-900/50">
               <div className="w-12 h-12 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-all duration-300">
                 <svg
                   className="w-6 h-6 text-blue-600 dark:text-blue-400"
@@ -177,7 +176,7 @@ export default function Home() {
                 qooduun qormaata keessatti milkaa'uu dandeessu.
               </p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-indigo-100 dark:hover:border-indigo-900/50">
+            <div className="group glass-card rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 border hover:border-indigo-200 dark:hover:border-indigo-900/50">
               <div className="w-12 h-12 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 transition-all duration-300">
                 <svg
                   className="w-6 h-6 text-indigo-600 dark:text-indigo-400"
@@ -201,7 +200,7 @@ export default function Home() {
                 isaanii ittiin guddisuu danda'an.
               </p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-amber-100 dark:hover:border-amber-900/50">
+            <div className="group glass-card rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 border hover:border-amber-200 dark:hover:border-amber-900/50">
               <div className="w-12 h-12 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-amber-100 dark:group-hover:bg-amber-900/50 transition-all duration-300">
                 <svg
                   className="w-6 h-6 text-amber-600 dark:text-amber-400"
@@ -225,7 +224,7 @@ export default function Home() {
                 dhaamsa isaanii dabarsuu barbaanna.
               </p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-emerald-100 dark:hover:border-emerald-900/50">
+            <div className="group glass-card rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 border hover:border-emerald-200 dark:hover:border-emerald-900/50">
               <div className="w-12 h-12 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 transition-all duration-300">
                 <svg
                   className="w-6 h-6 text-emerald-600 dark:text-emerald-400"
@@ -249,7 +248,7 @@ export default function Home() {
                 hawaasa irratti dhiibbaa gaarii uumuu barbaanna.
               </p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-purple-100 dark:hover:border-purple-900/50">
+            <div className="group glass-card rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 border hover:border-purple-200 dark:hover:border-purple-900/50">
               <div className="w-12 h-12 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50 transition-all duration-300">
                 <svg
                   className="w-6 h-6 text-purple-600 dark:text-purple-400"
@@ -273,7 +272,7 @@ export default function Home() {
                 kennuun warra itti aanuuf karaa banuu barbaanna.
               </p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-rose-100 dark:hover:border-rose-900/50">
+            <div className="group glass-card rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 border hover:border-rose-200 dark:hover:border-rose-900/50">
               <div className="w-12 h-12 rounded-lg bg-rose-50 dark:bg-rose-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-rose-100 dark:group-hover:bg-rose-900/50 transition-all duration-300">
                 <svg
                   className="w-6 h-6 text-rose-600 dark:text-rose-400"
@@ -316,11 +315,11 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/waaee"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-blue-600 dark:bg-gray-900 dark:text-blue-400 font-semibold rounded-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              className="btn-secondary px-8 py-3.5 group"
             >
               Gamoo Deemi
               <svg
-                className="w-5 h-5"
+                className="w-5 h-5 group-hover:translate-x-1 transition-transform"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -335,16 +334,16 @@ export default function Home() {
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-white/30 dark:border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 dark:hover:bg-white/5 hover:border-white/50 dark:hover:border-white/30 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/30 dark:border-white/20 text-white font-semibold rounded-xl hover:bg-white/10 dark:hover:bg-white/5 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
             >
               Nu Qunnami
             </Link>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white dark:from-gray-900 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 dark:from-dark-bg to-transparent"></div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-white dark:bg-gray-900">
+      <section className="py-16 sm:py-20 bg-gray-50 dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/50 dark:to-indigo-900/50 flex items-center justify-center">

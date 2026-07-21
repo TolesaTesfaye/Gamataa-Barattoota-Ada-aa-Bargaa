@@ -77,14 +77,18 @@ export default function EventDetail() {
     setRegistrationError(null);
     try {
       if (isRegistered) {
-        await apiClient.delete(`/events/${event._id}/register`);
+        const res = await apiClient.post(`/events/${event._id}/unregister`);
         setEvent((prev) =>
           prev
             ? {
                 ...prev,
-                attendees: prev.attendees.filter((a: Attendee | string) =>
-                  typeof a === "object" ? a._id !== user?._id : a !== user?._id,
-                ),
+                attendees:
+                  res.data.event?.attendees ||
+                  prev.attendees.filter((a: Attendee | string) =>
+                    typeof a === "object"
+                      ? a._id !== user?._id
+                      : a !== user?._id,
+                  ),
               }
             : prev,
         );
@@ -94,7 +98,10 @@ export default function EventDetail() {
           prev
             ? {
                 ...prev,
-                attendees: res.data.attendees || [...prev.attendees, user],
+                attendees: res.data.event?.attendees || [
+                  ...prev.attendees,
+                  user,
+                ],
               }
             : prev,
         );

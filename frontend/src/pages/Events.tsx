@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 import apiClient from "../services/api";
 
 interface Event {
@@ -13,6 +14,7 @@ interface Event {
   status: string;
   attendees: string[];
   maxAttendees: number;
+  organizer: { firstName: string; lastName: string } | string;
 }
 
 const tabLabels: Record<string, string> = {
@@ -26,6 +28,7 @@ const statusColors: Record<string, string> = {
   upcoming: "bg-green-500/20 text-green-400 border-green-500/30",
   ongoing: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
   completed: "bg-gray-500/20 text-gray-400 border-gray-500/30",
+  cancelled: "bg-red-500/20 text-red-400 border-red-500/30",
 };
 
 const categoryColors: Record<string, string> = {
@@ -35,6 +38,7 @@ const categoryColors: Record<string, string> = {
   meeting: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   seminar: "bg-orange-500/20 text-orange-400 border-orange-500/30",
   webinar: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
+  training: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
 };
 
 function SkeletonCard() {
@@ -55,11 +59,13 @@ function SkeletonCard() {
 }
 
 export default function Events() {
+  const { user, token } = useAuthStore();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
+  const [registeringId, setRegisteringId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -78,6 +84,44 @@ export default function Events() {
     fetchEvents();
   }, []);
 
+  const isRegistered = (event: Event) =>
+    user &&
+    (event.attendees as string[])?.some((a) =>
+      typeof a === "object" ? (a as any)._id === user._id : a === user._id,
+    );
+
+  const handleRegisterToggle = async (event: Event) => {
+    if (!token || !user) return;
+    setRegisteringId(event._id);
+    try {
+      if (isRegistered(event)) {
+        const res = await apiClient.post(`/events/${event._id}/unregister`);
+        setEvents((prev) =>
+          prev.map((e) =>
+            e._id === event._id
+              ? { ...e, attendees: res.data.event.attendees }
+              : e,
+          ),
+        );
+      } else {
+        const res = await apiClient.post(`/events/${event._id}/register`);
+        setEvents((prev) =>
+          prev.map((e) =>
+            e._id === event._id
+              ? { ...e, attendees: res.data.event.attendees }
+              : e,
+          ),
+        );
+      }
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Registration failed");
+      setTimeout(() => setError(null), 3000);
+    } finally {
+      setRegisteringId(null);
+    }
+  };
+
   const filtered = events.filter((event) => {
     const matchesTab = activeTab === "all" || event.status === activeTab;
     const matchesSearch = event.title
@@ -87,12 +131,38 @@ export default function Events() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold text-white">Taateewwan</h1>
-        <div className="mt-2 h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-bold text-white">Taateewwan</h1>
+          <p className="text-gray-400 mt-1">
+            Taateewwan gamtaa keenyaa hunda argii fi galmee
+          </p>
+          <div className="mt-2 h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+        </div>
+        <Link
+          to="/my-events"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 rounded-lg hover:bg-blue-600/20 transition-all text-sm font-medium"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+          Ta'oota Koo
+        </Link>
       </div>
 
+      {/* Tabs & Search */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex gap-1 bg-gray-800/60 rounded-lg p-1 border border-gray-700/50">
           {["all", "upcoming", "ongoing", "completed"].map((tab) => (
@@ -134,16 +204,9 @@ export default function Events() {
         </div>
       </div>
 
-      {loading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-      )}
-
+      {/* Error Message */}
       {error && (
-        <div className="bg-red-900/30 border border-red-500/30 text-red-400 px-5 py-4 rounded-xl flex items-center gap-3">
+        <div className="bg-red-900/30 border border-red-500/30 text-red-400 px-5 py-4 rounded-xl flex items-center gap-3 animate-fadeIn">
           <svg
             className="w-5 h-5 shrink-0"
             fill="none"
@@ -161,6 +224,16 @@ export default function Events() {
         </div>
       )}
 
+      {/* Loading */}
+      {loading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      )}
+
+      {/* Empty State */}
       {!loading && !error && filtered.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 text-gray-500">
           <svg
@@ -183,6 +256,7 @@ export default function Events() {
         </div>
       )}
 
+      {/* Event Cards */}
       {!loading && !error && filtered.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((event) => {
@@ -192,34 +266,75 @@ export default function Events() {
             const statColor =
               statusColors[event.status] ||
               "bg-gray-500/20 text-gray-400 border-gray-500/30";
+            const registered = isRegistered(event);
+            const isFull =
+              event.maxAttendees > 0 &&
+              (event.attendees as string[]).length >= event.maxAttendees;
+            const attendeeCount = (event.attendees as string[])?.length || 0;
+            const isPast =
+              event.status === "completed" || event.status === "cancelled";
+
             return (
-              <Link
+              <div
                 key={event._id}
-                to={`/events/${event._id}`}
-                className="group block bg-gray-800/50 rounded-xl border border-gray-700/50 overflow-hidden hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300"
+                className="group bg-gray-800/50 rounded-xl border border-gray-700/50 overflow-hidden hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300"
               >
+                {/* Status Bar */}
+                <div
+                  className={`h-1.5 w-full ${
+                    event.status === "upcoming"
+                      ? "bg-green-500"
+                      : event.status === "ongoing"
+                        ? "bg-yellow-500"
+                        : event.status === "completed"
+                          ? "bg-gray-600"
+                          : "bg-red-500"
+                  }`}
+                />
+
                 <div className="p-6 space-y-4">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${catColor}`}
-                    >
-                      {event.category}
-                    </span>
-                    <span
-                      className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${statColor}`}
-                    >
-                      {event.status}
-                    </span>
+                  {/* Category & Status Badges */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${catColor}`}
+                      >
+                        {event.category}
+                      </span>
+                      <span
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${statColor}`}
+                      >
+                        {event.status}
+                      </span>
+                    </div>
+                    {token && (
+                      <span
+                        className={`text-xs font-medium ${
+                          registered
+                            ? "text-green-400"
+                            : isFull
+                              ? "text-red-400"
+                              : "text-gray-500"
+                        }`}
+                      >
+                        {registered ? "● Galmaa'e" : isFull ? "● Guutuu" : ""}
+                      </span>
+                    )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
-                    {event.title}
-                  </h3>
+                  {/* Title */}
+                  <Link to={`/events/${event._id}`}>
+                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
+                      {event.title}
+                    </h3>
+                  </Link>
 
+                  {/* Description */}
                   <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
                     {event.description}
                   </p>
 
+                  {/* Date & Location */}
                   <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500">
                     <span className="flex items-center gap-1.5">
                       <svg
@@ -263,27 +378,148 @@ export default function Events() {
                       </svg>
                       {event.location}
                     </span>
-                    <span className="flex items-center gap-1.5">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                      {event.attendees.length}
-                      {event.maxAttendees ? `/${event.maxAttendees}` : ""}{" "}
-                      hirmaataa
-                    </span>
                   </div>
+
+                  {/* Attendees Progress */}
+                  <div>
+                    <div className="flex items-center justify-between text-sm mb-1.5">
+                      <span className="text-gray-400">
+                        <span className="font-semibold text-gray-300">
+                          {attendeeCount}
+                        </span>
+                        {event.maxAttendees ? (
+                          <>
+                            {" "}
+                            /{" "}
+                            <span className="font-semibold text-gray-300">
+                              {event.maxAttendees}
+                            </span>
+                          </>
+                        ) : null}{" "}
+                        hirmaataa
+                      </span>
+                      {event.maxAttendees > 0 && (
+                        <span className="text-xs text-gray-500">
+                          {Math.round(
+                            (attendeeCount / event.maxAttendees) * 100,
+                          )}
+                          %
+                        </span>
+                      )}
+                    </div>
+                    {event.maxAttendees > 0 && (
+                      <div className="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            attendeeCount >= event.maxAttendees
+                              ? "bg-red-500"
+                              : attendeeCount > event.maxAttendees * 0.8
+                                ? "bg-yellow-500"
+                                : "bg-blue-500"
+                          }`}
+                          style={{
+                            width: `${Math.min((attendeeCount / event.maxAttendees) * 100, 100)}%`,
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Register Button */}
+                  {token && !isPast && (
+                    <button
+                      onClick={() => handleRegisterToggle(event)}
+                      disabled={
+                        registeringId === event._id || (!registered && isFull)
+                      }
+                      className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${
+                        registered
+                          ? "bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500/20"
+                          : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/25"
+                      }`}
+                    >
+                      {registeringId === event._id ? (
+                        <>
+                          <svg
+                            className="animate-spin w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                            />
+                          </svg>
+                          Processing...
+                        </>
+                      ) : registered ? (
+                        <>
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                          Unregister
+                        </>
+                      ) : isFull ? (
+                        "Event is Full"
+                      ) : (
+                        <>
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          Register Now
+                        </>
+                      )}
+                    </button>
+                  )}
+
+                  {/* Login prompt for guests */}
+                  {!token && (
+                    <Link
+                      to="/login"
+                      className="block w-full py-2.5 rounded-lg font-semibold text-sm text-center text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all"
+                    >
+                      Seeniidhaan Galmee
+                    </Link>
+                  )}
+
+                  {/* View Details link */}
+                  <Link
+                    to={`/events/${event._id}`}
+                    className="block text-center text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                  >
+                    View Details →
+                  </Link>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

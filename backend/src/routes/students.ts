@@ -80,56 +80,19 @@ router.patch("/:id", authenticate, async (req: Request, res: Response) => {
       return;
     }
 
-    // Check authorization:
-    // - Superadmin can edit any student
-    // - Student can edit their own profile (if userId matches OR email+fullName+phone match)
-    const isSuperadmin = req.userRole === "superadmin";
+    const isAuthorized =
+      req.userRole === "superadmin" ||
+      req.userId === student.userId?.toString();
 
-    // Check by userId first
-    const isOwnerByUserId =
-      student.userId &&
-      req.userId &&
-      student.userId.toString() === req.userId.toString();
-
-    // Check by identity (email + fullName + phone match)
-    let isOwnerByIdentity = false;
-    if (req.userId && !isOwnerByUserId) {
-      const currentUser = await User.findById(req.userId);
-      if (currentUser) {
-        const fullName = `${currentUser.firstName} ${currentUser.lastName}`;
-        const studentNameLower = student.name.toLowerCase();
-        const fullNameLower = fullName.toLowerCase();
-        const studentEmail = student.email?.toLowerCase() || "";
-        const userEmail = currentUser.email?.toLowerCase() || "";
-
-        // Flexible name matching (handles nicknames like "(Tolman)")
-        const nameMatch =
-          studentNameLower.includes(fullNameLower) ||
-          fullNameLower.includes(studentNameLower);
-        const emailMatch = studentEmail === userEmail;
-        const phoneMatch = student.phone === currentUser.phone;
-
-        if (emailMatch && nameMatch && phoneMatch) {
-          isOwnerByIdentity = true;
-          // Link the userId to student for future edits
-          await Student.findByIdAndUpdate(req.params.id, {
-            userId: req.userId,
-          });
-        }
-      }
-    }
-
-    if (!isOwnerByUserId && !isOwnerByIdentity && !isSuperadmin) {
-      res
-        .status(403)
-        .json({ message: "Access denied: you can only edit your own profile" });
+    if (!isAuthorized) {
+      res.status(403).json({ message: "Access denied" });
       return;
     }
 
-    const updates = req.body;
+    // Apply updates directly via findByIdAndUpdate (most reliable approach)
     const updatedStudent = await Student.findByIdAndUpdate(
       req.params.id,
-      updates,
+      { $set: req.body },
       { new: true },
     );
 

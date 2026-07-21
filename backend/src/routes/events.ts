@@ -4,13 +4,41 @@ import { authenticate, authorize } from "../middleware/auth.js";
 
 const router: Router = express.Router();
 
-// Get all public events
+// Get all events (public, or all for authenticated users)
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const events = await Event.find({ isPublic: true })
-      .populate("organizer", "firstName lastName")
-      .populate("attendees", "firstName lastName")
-      .sort({ date: 1 });
+    // Check if user is authenticated (via query param or header)
+    const authHeader = req.headers.authorization;
+    let isAdmin = false;
+    if (authHeader) {
+      try {
+        const jwt = await import("jsonwebtoken");
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.default.verify(
+          token,
+          process.env.JWT_SECRET ||
+            "your-super-secret-jwt-key-change-in-production",
+        ) as { role: string };
+        if (decoded.role === "admin" || decoded.role === "superadmin") {
+          isAdmin = true;
+        }
+      } catch {
+        // Token invalid, treat as public
+      }
+    }
+
+    let events;
+    if (isAdmin) {
+      events = await Event.find()
+        .populate("organizer", "firstName lastName")
+        .populate("attendees", "firstName lastName")
+        .sort({ date: 1 });
+    } else {
+      events = await Event.find({ isPublic: true })
+        .populate("organizer", "firstName lastName")
+        .populate("attendees", "firstName lastName")
+        .sort({ date: 1 });
+    }
     res.json(events);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch events", error });
@@ -132,7 +160,11 @@ router.patch("/:id", authenticate, async (req: Request, res: Response) => {
       return;
     }
 
-    if (req.userId !== event.organizer.toString() && req.userRole !== "superadmin" && req.userRole !== "admin") {
+    const hasPermission =
+      req.userRole === "superadmin" ||
+      req.userRole === "admin" ||
+      req.userId === event.organizer.toString();
+    if (!hasPermission) {
       res.status(403).json({ message: "Access denied" });
       return;
     }
@@ -157,7 +189,11 @@ router.delete("/:id", authenticate, async (req: Request, res: Response) => {
       return;
     }
 
-    if (req.userId !== event.organizer.toString() && req.userRole !== "superadmin" && req.userRole !== "admin") {
+    const hasPermission =
+      req.userRole === "superadmin" ||
+      req.userRole === "admin" ||
+      req.userId === event.organizer.toString();
+    if (!hasPermission) {
       res.status(403).json({ message: "Access denied" });
       return;
     }

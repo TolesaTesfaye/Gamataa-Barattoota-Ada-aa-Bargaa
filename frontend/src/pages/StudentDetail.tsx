@@ -105,16 +105,15 @@ export default function StudentDetail() {
     if (user.role === "superadmin") return true;
     // Admin can edit any
     if (user.role === "admin") return true;
-    // Logged-in user can edit if student has matching userId
-    if (student.userId && student.userId === user._id) return true;
-    // Identity-based check: match email + name + phone (for static data students)
+    // Identity-based check: match name + email + phone
     const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
     const studentName = student.name.toLowerCase();
     const nameMatch =
       studentName.includes(fullName) || fullName.includes(studentName);
     const emailMatch =
       student.email?.toLowerCase() === user.email?.toLowerCase();
-    if (emailMatch && nameMatch) return true;
+    const phoneMatch = student.phone === user.phone;
+    if (emailMatch && nameMatch && phoneMatch) return true;
     return false;
   };
   const openEdit = () => {

@@ -5,7 +5,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useAuthStore } from "./store/authStore";
-import { LanguageProvider } from "./i18n/LanguageContext";
 import Layout from "./components/Layout";
 import PublicLanding from "./pages/PublicLanding";
 import Home from "./pages/Home";
@@ -55,11 +54,9 @@ const ADMIN_ROLES = ["superadmin", "admin"];
 
 function App() {
   return (
-    <LanguageProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </LanguageProvider>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <AppRoutes />
+    </Router>
   );
 }
 

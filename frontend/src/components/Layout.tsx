@@ -1,14 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
-import { useLanguage, type TranslationKey } from "../i18n/LanguageContext";
-import LanguageToggle from "./LanguageToggle";
 import apiClient from "../services/api";
 import Footer from "./Footer";
 
 export default function Layout() {
   const { user, token, logout } = useAuthStore();
-  const { t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -63,36 +60,35 @@ export default function Layout() {
 
   const dropdowns = [
     {
-      label: t("nav.dabalata"),
+      label: "More",
       items: [
-        { to: "/waaee", label: t("nav.waaee") },
-        { to: "/about", label: t("nav.about") },
-        { to: "/leadership", label: t("nav.leadership") },
-        { to: "/faqs", label: t("nav.faqs") },
-        { to: "/service", label: t("nav.service") },
+        { to: "/waaee", label: "About Us" },
+        { to: "/about", label: "About" },
+        { to: "/leadership", label: "Leadership" },
+        { to: "/faqs", label: "FAQs" },
+        { to: "/service", label: "Service" },
       ],
     },
     {
-      label: t("nav.hawaasa"),
+      label: "Community",
       items: [
-        { to: "/members", label: t("nav.members") },
-        { to: "/gallery", label: t("nav.gallery") },
-        { to: "/alumni", label: t("nav.alumni") },
+        { to: "/members", label: "Members" },
+        { to: "/gallery", label: "Gallery" },
       ],
     },
     {
-      label: t("nav.qabeenya"),
+      label: "Resources",
       items: [
-        { to: "/documents", label: t("nav.documents") },
-        { to: "/resources", label: t("nav.resources") },
-        { to: "/opportunities", label: t("nav.opportunities") },
+        { to: "/documents", label: "Documents" },
+        { to: "/resources", label: "Learning Resources" },
+        { to: "/opportunities", label: "Opportunities" },
       ],
     },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-      <nav className="bg-white dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-40">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-dark-bg selection:bg-primary-500/30">
+      <nav className="glass-nav fixed top-0 left-0 right-0 z-40 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
@@ -144,11 +140,11 @@ export default function Layout() {
                   <div key={dd.label} className="relative group">
                     <button
                       type="button"
-                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
+                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
                     >
                       {dd.label}
                       <svg
-                        className="w-4 h-4"
+                        className="w-4 h-4 transition-transform group-hover:rotate-180"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -161,16 +157,16 @@ export default function Layout() {
                         />
                       </svg>
                     </button>
-                    <div className="absolute left-0 top-full mt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+                    <div className="absolute left-0 top-full mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 glass-card rounded-xl py-2 z-50 transform origin-top scale-95 group-hover:scale-100">
                       {dd.items.map((item) => (
                         <button
                           key={item.to}
                           type="button"
                           onClick={() => navigate(item.to)}
-                          className={`block w-full text-left px-4 py-2 text-sm transition-colors ${
+                          className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
                             location.pathname === item.to
-                              ? "text-primary bg-blue-50 dark:bg-blue-900/20"
-                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                              ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
                           }`}
                         >
                           {item.label}
@@ -179,47 +175,356 @@ export default function Layout() {
                     </div>
                   </div>
                 ))}
-                <Link
-                  to="/events"
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive("/events")}`}
-                >
-                  {t("nav.events")}
-                </Link>
-                <Link
-                  to="/news"
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive("/news")}`}
-                >
-                  {t("nav.news")}
-                </Link>
-                {user?.role === "superadmin" && (
-                  <Link
-                    to="/superadmin/dashboard"
-                    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                      location.pathname.startsWith("/superadmin")
+                <div className="relative group">
+                  <button
+                    type="button"
+                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      location.pathname === "/events" ||
+                      location.pathname === "/news"
                         ? "text-primary"
-                        : "text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
+                        : "text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
                     }`}
                   >
-                    {t("nav.superadmin")}
-                  </Link>
-                )}
-                {user?.role === "admin" && (
-                  <Link
-                    to="/admin/dashboard"
-                    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                      location.pathname.startsWith("/admin")
-                        ? "text-primary"
-                        : "text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
-                    }`}
-                  >
-                    {t("nav.admin")}
-                  </Link>
+                    Events & News
+                    <svg
+                      className="w-4 h-4 transition-transform group-hover:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <div className="absolute left-0 top-full mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 glass-card rounded-xl py-2 z-50 transform origin-top scale-95 group-hover:scale-100">
+                    <button
+                      type="button"
+                      onClick={() => navigate("/events")}
+                      className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                        location.pathname === "/events"
+                          ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                      }`}
+                    >
+                      Events
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => navigate("/news")}
+                      className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                        location.pathname === "/news"
+                          ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                      }`}
+                    >
+                      News
+                    </button>
+                  </div>
+                </div>
+                {(user?.role === "superadmin" || user?.role === "admin") && (
+                  <div className="relative group">
+                    <button
+                      type="button"
+                      className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                        location.pathname.startsWith("/admin") ||
+                        location.pathname.startsWith("/superadmin")
+                          ? "text-primary"
+                          : "text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
+                      }`}
+                    >
+                      Manage
+                      <svg
+                        className="w-4 h-4 transition-transform group-hover:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    <div className="absolute left-0 top-full mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 glass-card rounded-xl py-2 z-50 transform origin-top scale-95 group-hover:scale-100">
+                      {user?.role === "superadmin" && (
+                        <button
+                          type="button"
+                          onClick={() => navigate("/superadmin/dashboard")}
+                          className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                            location.pathname === "/superadmin/dashboard"
+                              ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                          }`}
+                        >
+                          Super Admin Dashboard
+                        </button>
+                      )}
+                      {user?.role === "admin" && (
+                        <button
+                          type="button"
+                          onClick={() => navigate("/admin/dashboard")}
+                          className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                            location.pathname === "/admin/dashboard"
+                              ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                          }`}
+                        >
+                          Admin Dashboard
+                        </button>
+                      )}
+                      <hr className="my-1 border-gray-200 dark:border-gray-700 mx-2" />
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/events")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/events"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                          Event Management
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/news")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/news"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                            />
+                          </svg>
+                          News Management
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/gallery")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/gallery"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                          Gallery Management
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/documents")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/documents"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                          Documents
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/alumni")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/alumni"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m6-10a4 4 0 100-8 4 4 0 000 8z"
+                            />
+                          </svg>
+                          Alumni
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/opportunities")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/opportunities"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M21 13.255A23.893 23.893 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
+                          </svg>
+                          Opportunities
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigate("/admin/contact")}
+                        className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === "/admin/contact"
+                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
+                          </svg>
+                          Contact Messages
+                        </span>
+                      </button>
+                      {user?.role === "superadmin" && (
+                        <>
+                          <hr className="my-1 border-gray-200 dark:border-gray-700 mx-2" />
+                          <button
+                            type="button"
+                            onClick={() => navigate("/superadmin/users")}
+                            className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                              location.pathname === "/superadmin/users"
+                                ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                                />
+                              </svg>
+                              User Management
+                            </span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => navigate("/admin/students")}
+                            className={`block w-full text-left px-4 py-2 text-sm transition-all duration-200 ${
+                              location.pathname === "/admin/students"
+                                ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20 font-semibold"
+                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                                />
+                              </svg>
+                              Students
+                            </span>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
 
             <div className="flex items-center gap-2">
-              <LanguageToggle />
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -262,21 +567,17 @@ export default function Layout() {
                     user={user}
                     unreadCount={unreadCount}
                     logout={logout}
-                    t={t}
                   />
                 ) : (
                   <>
                     <Link
                       to="/login"
-                      className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-2 py-1.5 text-xs sm:text-sm font-medium transition-colors"
+                      className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
                     >
-                      {t("nav.login")}
+                      Login
                     </Link>
-                    <Link
-                      to="/register"
-                      className="bg-primary text-white px-2.5 py-1.5 rounded-md text-xs sm:text-sm font-medium hover:bg-secondary transition-colors"
-                    >
-                      {t("nav.register")}
+                    <Link to="/register" className="btn-primary">
+                      Register
                     </Link>
                   </>
                 )}
@@ -296,7 +597,6 @@ export default function Layout() {
               dropdowns={dropdowns}
               logout={logout}
               closeMenu={() => setMobileMenuOpen(false)}
-              t={t}
             />
           </>
         )}
@@ -329,12 +629,10 @@ function UserDropdown({
   user,
   unreadCount,
   logout,
-  t,
 }: {
   user: { firstName: string; lastName: string; role: string };
   unreadCount: number;
   logout: () => void;
-  t: (key: TranslationKey) => string;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => setOpen(false));
@@ -347,8 +645,8 @@ function UserDropdown({
         className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors rounded-md"
       >
         <div className="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
-          {user.firstName[0]}
-          {user.lastName[0]}
+          {user.firstName?.[0] ?? ""}
+          {user.lastName?.[0] ?? ""}
         </div>
         <span className="hidden xl:inline">
           {user.firstName} {user.lastName}
@@ -380,28 +678,28 @@ function UserDropdown({
             onClick={() => setOpen(false)}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            {t("nav.user.dashboard")}
+            Dashboard
           </Link>
           <Link
             to="/profile"
             onClick={() => setOpen(false)}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            {t("nav.user.profile")}
+            Profile
           </Link>
           <Link
             to="/my-events"
             onClick={() => setOpen(false)}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            {t("nav.user.myEvents")}
+            My Events
           </Link>
           <Link
             to="/notifications"
             onClick={() => setOpen(false)}
             className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
-            {t("nav.user.notifications")}
+            Notifications
             {unreadCount > 0 && (
               <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                 {unreadCount}
@@ -417,7 +715,7 @@ function UserDropdown({
             }}
             className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
           >
-            {t("nav.user.logout")}
+            Logout
           </button>
         </div>
       )}
@@ -430,13 +728,11 @@ function MobileMenu({
   dropdowns,
   logout,
   closeMenu,
-  t,
 }: {
   user: { firstName: string; lastName: string; role: string } | null;
   dropdowns: { label: string; items: { to: string; label: string }[] }[];
   logout: () => void;
   closeMenu: () => void;
-  t: (key: TranslationKey) => string;
 }) {
   const location = useLocation();
 
@@ -459,8 +755,8 @@ function MobileMenu({
     "px-3 pt-4 pb-0.5 text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest";
 
   return (
-    <div className="fixed inset-y-0 left-0 w-64 max-w-[75vw] z-50 lg:hidden bg-white dark:bg-gray-900 shadow-2xl flex flex-col animate-slide-in-left">
-      <div className="flex items-center justify-between px-3 h-12 border-b border-gray-200 dark:border-gray-700 shrink-0">
+    <div className="fixed inset-y-0 left-0 w-[280px] max-w-[80vw] z-50 lg:hidden glass-card shadow-2xl flex flex-col animate-slide-in-left border-r border-white/20 dark:border-white/10">
+      <div className="flex items-center justify-between px-4 h-16 border-b border-gray-200/50 dark:border-gray-700/50 shrink-0">
         <img
           src="/asset/Picture1.png"
           alt="GBAABW"
@@ -491,8 +787,8 @@ function MobileMenu({
           <>
             <div className="px-3 py-2 flex items-center gap-2.5 border-b border-gray-100 dark:border-gray-800 mb-1.5">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-[11px] font-bold shrink-0">
-                {user.firstName[0]}
-                {user.lastName[0]}
+                {user.firstName?.[0] ?? ""}
+                {user.lastName?.[0] ?? ""}
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-medium text-gray-900 dark:text-white truncate">
@@ -522,7 +818,7 @@ function MobileMenu({
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-              {t("mobile.dashboard")}
+              Dashboard
             </Link>
 
             {user?.role === "superadmin" && (
@@ -544,7 +840,7 @@ function MobileMenu({
                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
                   />
                 </svg>
-                {t("mobile.userManagement")}
+                User Management
               </Link>
             )}
 
@@ -552,6 +848,7 @@ function MobileMenu({
           </>
         )}
 
+        <p className={sectionHeadingClass}>Events & News</p>
         <Link to="/events" onClick={closeMenu} className={linkClass("/events")}>
           <svg
             className="w-4 h-4 shrink-0"
@@ -566,7 +863,7 @@ function MobileMenu({
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          {t("mobile.events")}
+          Events
         </Link>
         <Link to="/news" onClick={closeMenu} className={linkClass("/news")}>
           <svg
@@ -582,7 +879,7 @@ function MobileMenu({
               d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
             />
           </svg>
-          {t("mobile.news")}
+          News
         </Link>
 
         {dropdowns.map((group) => (
@@ -624,7 +921,7 @@ function MobileMenu({
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
             </svg>
-            {t("mobile.logout")}
+            Logout
           </button>
         ) : (
           <div className="flex flex-col gap-1.5">
@@ -633,14 +930,14 @@ function MobileMenu({
               onClick={closeMenu}
               className="w-full text-center px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
             >
-              {t("mobile.login")}
+              Login
             </Link>
             <Link
               to="/register"
               onClick={closeMenu}
               className="w-full text-center px-3 py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-lg transition-colors"
             >
-              {t("mobile.register")}
+              Register
             </Link>
           </div>
         )}

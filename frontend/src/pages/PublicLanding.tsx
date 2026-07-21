@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function PublicLanding() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b border-white/20 dark:border-gray-800/50">
+    <div className="min-h-screen bg-white dark:bg-dark-bg">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14 sm:h-16">
             <Link to="/" className="flex items-center gap-3 shrink-0 group">
@@ -15,7 +15,7 @@ export default function PublicLanding() {
             <div className="flex items-center gap-2 sm:gap-3">
               <Link
                 to="/login"
-                className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+                className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -24,7 +24,7 @@ export default function PublicLanding() {
               </Link>
               <Link
                 to="/register"
-                className="inline-flex items-center gap-1.5 px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-lg shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-200 hover:scale-[1.02]"
+                className="btn-primary py-1.5 sm:py-2 px-3 sm:px-5"
               >
                 Jalqabi
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -60,10 +60,10 @@ export default function PublicLanding() {
             Haramaayaa keessatti wal baruuf, wal gargaaruu fi wal jajjabeessuuf
             dhaabbatan.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 animate-slide-up" style={{animationDelay: '0.2s'}}>
             <Link
               to="/register"
-              className="group relative inline-flex items-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-blue-700 font-bold text-base sm:text-lg rounded-xl shadow-2xl hover:shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:scale-105 active:scale-[1.02] transition-all duration-300 overflow-hidden"
+              className="btn-primary px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg group"
             >
                 <span className="relative z-10">Hawaasa Keenyatti Makamuu</span>
               <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -107,7 +107,7 @@ export default function PublicLanding() {
               { title: "Gorsa fi Qajeelfama", desc: "Barattoota sadarkaa olaanaatti geessan gorsa fi qajeelfama kennuun warra itti aanuuf karaa banuu barbaanna.", color: "purple", path: "M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" },
               { title: "Meeshaalee Barumsaa", desc: "Meeshaalee barnootaa, yaadanno fi qajeelfama barumsaa qopheessinee isiniif dhiheessina.", color: "rose", path: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" },
             ].map((item, i) => (
-              <div key={i} className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-sm dark:shadow-gray-900/30 hover:shadow-xl dark:hover:shadow-gray-900/60 hover:-translate-y-2 transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:border-transparent overflow-hidden">
+              <div key={i} className="group relative glass-card p-6 sm:p-8 hover:-translate-y-2 transition-all duration-300 overflow-hidden rounded-2xl">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50/50 to-transparent dark:from-blue-900/10 rounded-bl-full -mr-12 -mt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className={`w-12 h-12 rounded-xl bg-${item.color}-50 dark:bg-${item.color}-900/30 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-${item.color}-100 dark:group-hover:bg-${item.color}-900/50 transition-all duration-300`}>
                   <svg className={`w-6 h-6 text-${item.color}-600 dark:text-${item.color}-400`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -145,9 +145,9 @@ export default function PublicLanding() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
             <Link
               to="/register"
-              className="group inline-flex items-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-blue-700 font-bold text-base sm:text-lg rounded-xl shadow-2xl hover:shadow-[0_20px_50px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-[1.02] transition-all duration-300"
+              className="btn-primary px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg group"
             >
-              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v.5H3V20z" />
               </svg>
               Miseensa Ta'i
@@ -157,7 +157,7 @@ export default function PublicLanding() {
             </Link>
             <Link
               to="/login"
-              className="inline-flex items-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-white/30 text-white font-semibold text-base sm:text-lg rounded-xl hover:bg-white/10 hover:border-white/50 backdrop-blur-sm transition-all duration-300"
+              className="btn-secondary px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -169,7 +169,7 @@ export default function PublicLanding() {
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white dark:from-gray-900 to-transparent" />
       </section>
 
-      <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-gray-900">
+      <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-dark-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div className="relative">

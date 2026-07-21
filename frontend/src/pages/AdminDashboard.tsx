@@ -6,7 +6,12 @@ import { useAuthStore } from "../store/authStore";
 interface DashboardStats {
   users: number;
   members: { active: number; inactive: number; total: number };
-  events: { upcoming: number; ongoing: number; completed: number; total: number };
+  events: {
+    upcoming: number;
+    ongoing: number;
+    completed: number;
+    total: number;
+  };
   news: { published: number; draft: number; total: number };
   documents: number;
   galleries: number;
@@ -23,7 +28,7 @@ interface Activity {
   createdAt: string;
 }
 
-const ADMIN_ROLES = ["superadmin", "leader"];
+const ADMIN_ROLES = ["superadmin", "admin"];
 
 export default function AdminDashboard() {
   const { user } = useAuthStore();
@@ -52,9 +57,7 @@ export default function AdminDashboard() {
       setStats(statsRes.data);
       setActivities(activityRes.data);
     } catch (err: any) {
-      setError(
-        err.response?.data?.message || "Failed to load dashboard data"
-      );
+      setError(err.response?.data?.message || "Failed to load dashboard data");
     } finally {
       setLoading(false);
     }
@@ -65,13 +68,25 @@ export default function AdminDashboard() {
         ...(isSuperadmin
           ? [{ label: "Total Users", value: stats.users, color: "bg-blue-500" }]
           : []),
-        { label: "Active Members", value: stats.members.active, color: "bg-green-500" },
+        {
+          label: "Active Members",
+          value: stats.members.active,
+          color: "bg-green-500",
+        },
         { label: "Events", value: stats.events.total, color: "bg-purple-500" },
         { label: "News", value: stats.news.total, color: "bg-yellow-500" },
         { label: "Documents", value: stats.documents, color: "bg-indigo-500" },
-        { label: "Gallery Albums", value: stats.galleries, color: "bg-pink-500" },
+        {
+          label: "Gallery Albums",
+          value: stats.galleries,
+          color: "bg-pink-500",
+        },
         { label: "Alumni", value: stats.alumni, color: "bg-teal-500" },
-        { label: "Revenue (GHS)", value: stats.payments.totalRevenue, color: "bg-orange-500" },
+        {
+          label: "Revenue (GHS)",
+          value: stats.payments.totalRevenue,
+          color: "bg-orange-500",
+        },
       ]
     : [];
 
@@ -81,13 +96,17 @@ export default function AdminDashboard() {
     { label: "Manage Users", path: "/admin/users", color: "bg-blue-500" },
   ];
 
-  const leaderActions = [
+  const adminActions = [
     { label: "Manage Events", path: "/admin/events", color: "bg-purple-500" },
     { label: "News & Updates", path: "/admin/news", color: "bg-yellow-500" },
     { label: "Gallery", path: "/admin/gallery", color: "bg-pink-500" },
     { label: "Documents", path: "/admin/documents", color: "bg-indigo-500" },
     { label: "Alumni", path: "/admin/alumni", color: "bg-teal-500" },
-    { label: "Opportunities", path: "/admin/opportunities", color: "bg-orange-500" },
+    {
+      label: "Opportunities",
+      path: "/admin/opportunities",
+      color: "bg-orange-500",
+    },
     { label: "Contact", path: "/admin/contact", color: "bg-red-500" },
   ];
 
@@ -109,20 +128,29 @@ export default function AdminDashboard() {
         <h1 className="text-4xl font-bold text-primary">
           {isSuperadmin ? "Superadmin Dashboard" : "Leader Dashboard"}
         </h1>
-        <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase ${
-          isSuperadmin ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700"
-        }`}>
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-semibold uppercase ${
+            isSuperadmin
+              ? "bg-red-100 text-red-700"
+              : "bg-blue-100 text-blue-700"
+          }`}
+        >
           {user?.role}
         </span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat) => (
-          <div key={stat.label} className="bg-white p-6 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div
+            key={stat.label}
+            className="bg-white p-6 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          >
             <div className="text-4xl font-bold text-primary mb-2">
               {stat.value}
             </div>
-            <div className="text-gray-600 dark:text-gray-300 font-semibold">{stat.label}</div>
+            <div className="text-gray-600 dark:text-gray-300 font-semibold">
+              {stat.label}
+            </div>
             <div className="mt-3 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div
                 className={`${stat.color} rounded-full h-2 transition-all`}
@@ -135,7 +163,9 @@ export default function AdminDashboard() {
 
       {isSuperadmin && (
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow dark:border dark:border-gray-700">
-          <h3 className="text-xl font-bold text-primary mb-4">User Management</h3>
+          <h3 className="text-xl font-bold text-primary mb-4">
+            User Management
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {superadminActions.map((action) => (
               <button
@@ -151,9 +181,11 @@ export default function AdminDashboard() {
       )}
 
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow dark:border dark:border-gray-700">
-        <h3 className="text-xl font-bold text-primary mb-4">Content Management</h3>
+        <h3 className="text-xl font-bold text-primary mb-4">
+          Content Management
+        </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {leaderActions.map((action) => (
+          {adminActions.map((action) => (
             <button
               key={action.label}
               onClick={() => navigate(action.path)}
@@ -168,7 +200,9 @@ export default function AdminDashboard() {
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow dark:border dark:border-gray-700">
         <h3 className="text-xl font-bold text-primary mb-4">Recent Activity</h3>
         {activities.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-400">No recent activity.</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            No recent activity.
+          </p>
         ) : (
           <div className="space-y-3">
             {activities.map((activity, idx) => (
@@ -181,8 +215,10 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-gray-900 dark:text-gray-100">
-                    <span className="font-semibold capitalize">{activity.action}</span>
-                    {" "}{activity.type}: {activity.title}
+                    <span className="font-semibold capitalize">
+                      {activity.action}
+                    </span>{" "}
+                    {activity.type}: {activity.title}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {new Date(activity.createdAt).toLocaleString()}

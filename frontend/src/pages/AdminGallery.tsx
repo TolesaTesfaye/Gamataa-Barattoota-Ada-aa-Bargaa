@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../services/api";
 import { useAuthStore } from "../store/authStore";
@@ -26,11 +26,10 @@ export default function AdminGallery() {
     description: "",
     category: "general",
   });
-  const [uploadForm, setUploadForm] = useState({
-    imageUrl: "",
-    caption: "",
-  });
+  const [caption, setCaption] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (user?.role !== "superadmin" && user?.role !== "admin") {
@@ -69,15 +68,29 @@ export default function AdminGallery() {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   const handleUploadImage = async (albumId: string) => {
-    if (!uploadForm.imageUrl) return;
+    if (!selectedFile) return;
     setSaving(true);
     setError(null);
     try {
-      await apiClient.post(`/gallery/${albumId}/images`, uploadForm);
+      const formData = new FormData();
+      formData.append("photo", selectedFile);
+      formData.append("caption", caption);
+
+      await apiClient.post(`/gallery/${albumId}/images`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setSuccess("Image uploaded!");
-      setUploadForm({ imageUrl: "", caption: "" });
+      setSelectedFile(null);
+      setCaption("");
       setShowUpload(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
       fetchAlbums();
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to upload image");
@@ -126,9 +139,7 @@ export default function AdminGallery() {
 
       {showCreate && (
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-xl font-bold text-primary mb-4">
-            Create Album
-          </h3>
+          <h3 className="text-xl font-bold text-primary mb-4">Create Album</h3>
           <form onSubmit={handleCreateAlbum} className="space-y-4">
             <div>
               <label className="block text-gray-700 font-semibold mb-2">
@@ -203,13 +214,11 @@ export default function AdminGallery() {
                 <div className="flex gap-2">
                   <button
                     onClick={() =>
-                      setShowUpload(
-                        showUpload === album._id ? null : album._id
-                      )
+                      setShowUpload(showUpload === album._id ? null : album._id)
                     }
                     className="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600"
                   >
-                    Add Images
+                    Add Photos
                   </button>
                   <button
                     onClick={() => handleDeleteAlbum(album._id)}
@@ -222,59 +231,66 @@ export default function AdminGallery() {
 
               {showUpload === album._id && (
                 <div className="mb-6 p-4 bg-gray-50 rounded">
-                  <h4 className="font-semibold mb-3">Upload Image</h4>
+                  <h4 className="font-semibold mb-3">Upload Photo</h4>
                   <div className="space-y-3">
-                    <input
-                      type="text"
-                      placeholder="Image URL..."
-                      value={uploadForm.imageUrl}
-                      onChange={(e) =>
-                        setUploadForm({
-                          ...uploadForm,
-                          imageUrl: e.target.value,
-                        })
-                      }
-                      className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
+                    <div>
+                      <label className="block text-gray-600 text-sm mb-1">
+                        Select a photo from your computer
+                      </label>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-secondary"
+                      />
+                      {selectedFile && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Selected: {selectedFile.name} (
+                          {(selectedFile.size / 1024).toFixed(1)} KB)
+                        </p>
+                      )}
+                    </div>
                     <input
                       type="text"
                       placeholder="Caption (optional)"
-                      value={uploadForm.caption}
-                      onChange={(e) =>
-                        setUploadForm({
-                          ...uploadForm,
-                          caption: e.target.value,
-                        })
-                      }
+                      value={caption}
+                      onChange={(e) => setCaption(e.target.value)}
                       className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                     <button
                       onClick={() => handleUploadImage(album._id)}
-                      disabled={saving || !uploadForm.imageUrl}
+                      disabled={saving || !selectedFile}
                       className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition disabled:opacity-50"
                     >
-                      {saving ? "Uploading..." : "Upload"}
+                      {saving ? "Uploading..." : "Upload Photo"}
                     </button>
                   </div>
                 </div>
               )}
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {album.images.map((img, idx) => (
-                  <div key={idx} className="relative group">
-                    <img
-                      src={img.url}
-                      alt={img.caption || album.title}
-                      className="w-full h-32 object-cover rounded"
-                    />
-                    {img.caption && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 rounded-b">
-                        {img.caption}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+              {album.images.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {album.images.map((img, idx) => (
+                    <div key={idx} className="relative group">
+                      <img
+                        src={img.url}
+                        alt={img.caption || album.title}
+                        className="w-full h-32 object-cover rounded"
+                      />
+                      {img.caption && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 rounded-b">
+                          {img.caption}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-400 text-sm text-center py-4">
+                  No images yet. Click "Add Photos" to upload.
+                </p>
+              )}
             </div>
           ))}
         </div>

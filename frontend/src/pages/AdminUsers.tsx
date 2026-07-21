@@ -13,7 +13,7 @@ interface User {
   createdAt: string;
 }
 
-const ROLES = ["student", "leader", "superadmin"];
+const ROLES = ["student", "admin", "superadmin"];
 
 export default function AdminUsers() {
   const { user } = useAuthStore();
@@ -35,24 +35,23 @@ export default function AdminUsers() {
     try {
       const response = await apiClient.get("/users");
       setUsers(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to fetch users");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to fetch users");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleStatusChange = async (
-    userId: string,
-    status: string
-  ) => {
+  const handleStatusChange = async (userId: string, status: string) => {
     try {
       await apiClient.patch(`/users/${userId}/status`, { status });
       setUsers((prev) =>
-        prev.map((u) => (u._id === userId ? { ...u, status } : u))
+        prev.map((u) => (u._id === userId ? { ...u, status } : u)),
       );
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to update user");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to update user");
     }
   };
 
@@ -60,21 +59,22 @@ export default function AdminUsers() {
     try {
       await apiClient.patch(`/users/${userId}`, { role });
       setUsers((prev) =>
-        prev.map((u) => (u._id === userId ? { ...u, role } : u))
+        prev.map((u) => (u._id === userId ? { ...u, role } : u)),
       );
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to update role");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to update role");
     }
   };
 
   const handleDelete = async (userId: string) => {
-    if (!window.confirm("Are you sure you want to delete this user?"))
-      return;
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
       await apiClient.delete(`/users/${userId}`);
       setUsers((prev) => prev.filter((u) => u._id !== userId));
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to delete user");
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || "Failed to delete user");
     }
   };
 
@@ -82,7 +82,7 @@ export default function AdminUsers() {
     (u) =>
       u.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       u.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      u.email.toLowerCase().includes(searchTerm.toLowerCase())
+      u.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   if (loading) {
@@ -180,9 +180,7 @@ export default function AdminUsers() {
                           Approve
                         </button>
                         <button
-                          onClick={() =>
-                            handleStatusChange(u._id, "suspended")
-                          }
+                          onClick={() => handleStatusChange(u._id, "suspended")}
                           className="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600"
                         >
                           Reject
@@ -191,9 +189,7 @@ export default function AdminUsers() {
                     )}
                     {u.status === "active" && (
                       <button
-                        onClick={() =>
-                          handleStatusChange(u._id, "suspended")
-                        }
+                        onClick={() => handleStatusChange(u._id, "suspended")}
                         className="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600"
                       >
                         Suspend

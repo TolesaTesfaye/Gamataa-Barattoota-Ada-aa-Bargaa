@@ -20,6 +20,7 @@ interface AuthResponse {
     firstName: string;
     lastName: string;
     role: string;
+    phone?: string;
   };
 }
 
