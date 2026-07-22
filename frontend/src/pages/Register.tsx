@@ -446,19 +446,19 @@ export default function Register() {
                 className="text-sm text-gray-500 dark:text-gray-400"
               >
                 I agree to the{" "}
-                <a
-                  href="#"
+                <Link
+                  to="/terms-of-service"
                   className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                 >
                   Terms of Service
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a
-                  href="#"
+                <Link
+                  to="/privacy-policy"
                   className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </label>
             </div>
 

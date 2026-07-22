@@ -4,12 +4,41 @@ import { authenticate, authorize } from "../middleware/auth.js";
 
 const router: Router = express.Router();
 
-// Get all published news
+// Get all published news (public)
 router.get("/", async (req: Request, res: Response) => {
   try {
     const news = await News.find({ status: "published", isPublic: true })
       .populate("author", "firstName lastName")
       .sort({ publishedAt: -1 });
+    res.json(news);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch news", error });
+  }
+});
+
+// Get all news for admin (all statuses)
+router.get("/admin/all", authenticate, async (req: Request, res: Response) => {
+  try {
+    const { status, category, search } = req.query;
+
+    const query: any = {};
+
+    if (status && status !== "all") {
+      query.status = status;
+    }
+
+    if (category && category !== "all") {
+      query.category = category;
+    }
+
+    if (search) {
+      query.title = { $regex: search, $options: "i" };
+    }
+
+    const news = await News.find(query)
+      .populate("author", "firstName lastName email")
+      .sort({ createdAt: -1 });
+
     res.json(news);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch news", error });
@@ -67,7 +96,11 @@ router.post(
         return;
       }
 
-      if (req.userId !== news.author.toString() && req.userRole !== "superadmin" && req.userRole !== "admin") {
+      if (
+        req.userId !== news.author.toString() &&
+        req.userRole !== "superadmin" &&
+        req.userRole !== "admin"
+      ) {
         res.status(403).json({ message: "Access denied" });
         return;
       }
@@ -92,7 +125,11 @@ router.patch("/:id", authenticate, async (req: Request, res: Response) => {
       return;
     }
 
-    if (req.userId !== news.author.toString() && req.userRole !== "superadmin" && req.userRole !== "admin") {
+    if (
+      req.userId !== news.author.toString() &&
+      req.userRole !== "superadmin" &&
+      req.userRole !== "admin"
+    ) {
       res.status(403).json({ message: "Access denied" });
       return;
     }
@@ -117,7 +154,11 @@ router.delete("/:id", authenticate, async (req: Request, res: Response) => {
       return;
     }
 
-    if (req.userId !== news.author.toString() && req.userRole !== "superadmin" && req.userRole !== "admin") {
+    if (
+      req.userId !== news.author.toString() &&
+      req.userRole !== "superadmin" &&
+      req.userRole !== "admin"
+    ) {
       res.status(403).json({ message: "Access denied" });
       return;
     }

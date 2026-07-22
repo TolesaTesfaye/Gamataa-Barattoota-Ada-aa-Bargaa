@@ -37,13 +37,11 @@ export default function PublicLanding() {
       </nav>
 
       <section className="relative flex items-center justify-center overflow-hidden pt-16 sm:pt-20 pb-24 sm:pb-28">
-        <div
-          className="absolute inset-0 bg-cover bg-top bg-no-repeat"
-          style={{ backgroundImage: "url('/background/Picture37.png')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-purple-900/30 mix-blend-overlay" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+        <div className="absolute top-10 left-[-5rem] h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
+        <div className="absolute bottom-0 right-[-8rem] h-80 w-80 rounded-full bg-indigo-500/20 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.06),transparent_70%)]" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 sm:pt-0">
           <div className="inline-flex items-center gap-2 mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs sm:text-sm font-medium tracking-wide animate-fade-in">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -65,11 +63,10 @@ export default function PublicLanding() {
               to="/register"
               className="btn-primary px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg group"
             >
-                <span className="relative z-10">Hawaasa Keenyatti Makamuu</span>
-              <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <span>Hawaasa Keenyatti Makamuu</span>
+              <svg className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
             <Link
               to="/login"

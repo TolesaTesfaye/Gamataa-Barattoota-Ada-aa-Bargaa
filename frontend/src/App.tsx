@@ -34,6 +34,7 @@ import StudentDetail from "./pages/StudentDetail";
 import NewsDetail from "./pages/NewsDetail";
 import EventDetail from "./pages/EventDetail";
 import MemberDetail from "./pages/MemberDetail";
+import { PrivacyPolicy, TermsOfService } from "./pages/LegalPages";
 import Profile from "./pages/Profile";
 import MyEvents from "./pages/MyEvents";
 import Documents from "./pages/Documents";
@@ -90,6 +91,8 @@ function AppRoutes() {
         <Route path="/" element={<PublicLanding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     );
@@ -118,6 +121,8 @@ function AppRoutes() {
         <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/members/:id" element={<MemberDetail />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
 
         {/* Student Dashboard */}
         <Route path="/dashboard" element={<Dashboard />} />

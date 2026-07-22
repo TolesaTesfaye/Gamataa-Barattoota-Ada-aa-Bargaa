@@ -65,6 +65,7 @@ export default function Layout() {
         { to: "/waaee", label: "About Us" },
         { to: "/about", label: "About" },
         { to: "/leadership", label: "Leadership" },
+        { to: "/koreewwan", label: "Committees" },
         { to: "/faqs", label: "FAQs" },
         { to: "/service", label: "Service" },
       ],

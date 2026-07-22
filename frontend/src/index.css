@@ -19,7 +19,12 @@
   }
 
   /* Headings with Display Font */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight text-gray-900 dark:text-white;
   }
 
@@ -53,7 +58,7 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .table-scroll {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
@@ -76,8 +81,12 @@
 }
 
 @keyframes slide-in-left {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .animate-slide-in-left {
@@ -93,11 +102,13 @@
 
 @media (max-width: 768px) {
   /* Increase touch targets */
-  button, a {
+  button,
+  a {
     @apply min-h-[44px] min-w-[44px];
   }
   /* Exclude inline links */
-  p a, span a {
+  p a,
+  span a {
     @apply min-h-0 min-w-0;
   }
 }

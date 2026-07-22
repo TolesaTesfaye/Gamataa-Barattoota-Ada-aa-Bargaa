@@ -175,12 +175,15 @@ export default function Footer() {
             Bargaa. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-sm text-gray-500">
-            <Link to="/faqs" className="hover:text-primary transition-colors">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-primary transition-colors"
+            >
               Privacy Policy
             </Link>
             <span className="text-gray-700">|</span>
             <Link
-              to="/contact"
+              to="/terms-of-service"
               className="hover:text-primary transition-colors"
             >
               Terms of Service
