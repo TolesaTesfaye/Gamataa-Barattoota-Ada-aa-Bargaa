@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const goals = [
   {
@@ -246,7 +247,7 @@ export default function Waaee() {
       {/* Back to Top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed bottom-8 right-8 z-50 w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 hover:scale-110 transition-all duration-300 flex items-center justify-center ${showBackTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+        className={`fixed bottom-24 xl:bottom-8 right-4 sm:right-8 z-30 w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 hover:scale-110 transition-all duration-300 flex items-center justify-center ${showBackTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
       >
         <svg
           className="w-5 h-5"
@@ -264,7 +265,7 @@ export default function Waaee() {
       </button>
 
       {/* Page 1: Logo + Association Info */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 pt-14 sm:pt-16">
         <div className="absolute inset-0 bg-black/30 z-10" />
         <img
           src="/background/Picture1.png"
@@ -275,40 +276,7 @@ export default function Waaee() {
         <div className="absolute top-1/3 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-1/3 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-[140px] anim-float" />
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div data-anim="fade-up" className="mb-8">
-            <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto rounded-full bg-white/10 border-4 border-white/20 backdrop-blur-md p-3 shadow-2xl shadow-emerald-900/50 flex items-center justify-center group transition-all duration-500 hover:scale-105 hover:border-emerald-400/50">
-              <img
-                src="/asset/Picture1.png"
-                alt="Gamtaa Barattoota Aanaa Ada'aa Bargaa"
-                className="w-full h-full object-contain rounded-full"
-              />
-            </div>
-          </div>
-          <h1
-            data-anim="fade-up"
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 tracking-tight leading-tight"
-          >
-            Gamtaa Barattoota
-            <br />
-            Aanaa Ada'aa Bargaa
-          </h1>
-          <p
-            data-anim="fade-up"
-            className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            Yuunivarsiitii Haramaayaa keessatti barattoota walitti qabuu fi
-            <br />
-            wal gargaaruu fi guddina ogummaa isaanii irratti hojjata.
-          </p>
-          <div
-            data-anim="fade-up"
-            className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm font-medium tracking-wide backdrop-blur-sm"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Hundeeffame 25/05/2013 A.L.I
-          </div>
-        </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"></div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
@@ -1261,7 +1229,6 @@ export default function Waaee() {
           </div>
         </section>
       </div>
-
     </div>
   );
 }

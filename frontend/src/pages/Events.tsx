@@ -131,19 +131,22 @@ export default function Events() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-bold text-white">Taateewwan</h1>
-          <p className="text-gray-400 mt-1">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+            Taateewwan
+          </h1>
+          <p className="text-gray-400 mt-1 text-sm sm:text-base">
             Taateewwan gamtaa keenyaa hunda argii fi galmee
           </p>
-          <div className="mt-2 h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+          <div className="mt-2 h-1 w-16 sm:w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
         <Link
-          to="/my-events"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 rounded-lg hover:bg-blue-600/20 transition-all text-sm font-medium"
+          to={token ? "/my-events" : "/login"}
+          state={token ? undefined : { from: "/my-events" }}
+          className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 min-h-[44px] bg-blue-600/10 border border-blue-500/30 text-blue-400 rounded-lg hover:bg-blue-600/20 transition-all text-sm font-medium"
         >
           <svg
             className="w-4 h-4"
@@ -158,31 +161,33 @@ export default function Events() {
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          Ta'oota Koo
+          {token ? "Ta'oota Koo" : "Login for My Events"}
         </Link>
       </div>
 
-      {/* Tabs & Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex gap-1 bg-gray-800/60 rounded-lg p-1 border border-gray-700/50">
-          {["all", "upcoming", "ongoing", "completed"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-all ${
-                activeTab === tab
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                  : "text-gray-400 hover:text-white hover:bg-gray-700/50"
-              }`}
-            >
-              {tabLabels[tab] || tab}
-            </button>
-          ))}
+      {/* Tabs & Search — edge-scroll tabs on phone */}
+      <div className="flex flex-col gap-3 sm:gap-4">
+        <div className="-mx-3 px-3 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-none">
+          <div className="flex gap-1 bg-gray-800/60 rounded-lg p-1 border border-gray-700/50 w-max min-w-full sm:min-w-0 sm:w-auto">
+            {["all", "upcoming", "ongoing", "completed"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-1 sm:flex-none px-3 sm:px-4 py-2.5 min-h-[44px] rounded-md text-xs sm:text-sm font-medium capitalize transition-all whitespace-nowrap ${
+                  activeTab === tab
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
+                    : "text-gray-400 hover:text-white hover:bg-gray-700/50"
+                }`}
+              >
+                {tabLabels[tab] || tab}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="relative">
+        <div className="relative w-full">
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -195,11 +200,13 @@ export default function Events() {
             />
           </svg>
           <input
-            type="text"
+            type="search"
+            inputMode="search"
+            enterKeyHint="search"
             placeholder="Taateewwan barbaadi..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 pr-4 py-2 bg-gray-800/60 border border-gray-700/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 w-full sm:w-64"
+            className="pl-10 pr-4 py-3 min-h-[48px] bg-gray-800/60 border border-gray-700/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 w-full text-base"
           />
         </div>
       </div>
@@ -501,14 +508,25 @@ export default function Events() {
                     </button>
                   )}
 
-                  {/* Login prompt for guests */}
                   {!token && (
-                    <Link
-                      to="/login"
-                      className="block w-full py-2.5 rounded-lg font-semibold text-sm text-center text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all"
-                    >
-                      Seeniidhaan Galmee
-                    </Link>
+                    <div className="space-y-2">
+                      <Link
+                        to="/login"
+                        state={{ from: `/events/${event._id}` }}
+                        className="block w-full py-2.5 rounded-lg font-semibold text-sm text-center text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 transition-all"
+                      >
+                        Login to register
+                      </Link>
+                      <p className="text-center text-xs text-gray-500">
+                        No account?{" "}
+                        <Link
+                          to="/register"
+                          className="text-blue-400 hover:underline"
+                        >
+                          Register
+                        </Link>
+                      </p>
+                    </div>
                   )}
 
                   {/* View Details link */}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
 export default function Login() {
@@ -9,7 +9,10 @@ export default function Login() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, isLoading, error, clearError } = useAuthStore();
+  const from =
+    (location.state as { from?: string } | null)?.from || "/dashboard";
 
   const validateForm = () => {
     let valid = true;
@@ -37,7 +40,7 @@ export default function Login() {
 
     try {
       await login(email, password);
-      navigate("/dashboard");
+      navigate(from, { replace: true });
     } catch {
       // handled by store
     }

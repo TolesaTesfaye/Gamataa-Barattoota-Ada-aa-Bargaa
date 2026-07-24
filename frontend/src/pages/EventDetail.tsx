@@ -403,15 +403,24 @@ export default function EventDetail() {
               </div>
             )}
             {!token && (
-              <p className="text-gray-500 text-sm mt-3">
+              <div className="mt-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                 <Link
                   to="/login"
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                  state={{ from: `/events/${event._id}` }}
+                  className="inline-flex justify-center px-5 py-2.5 rounded-lg font-semibold text-sm bg-blue-600 text-white hover:bg-blue-700 transition-colors"
                 >
-                  Log in
-                </Link>{" "}
-                to register for this event.
-              </p>
+                  Login to register
+                </Link>
+                <p className="text-gray-500 text-sm">
+                  or{" "}
+                  <Link
+                    to="/register"
+                    className="text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    create an account
+                  </Link>
+                </p>
+              </div>
             )}
           </div>
 

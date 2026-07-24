@@ -93,22 +93,32 @@
   animation: slide-in-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Mobile responsive typography */
+/* Mobile-first: readable type + safe areas for notched phones */
 @media screen and (max-width: 640px) {
   html {
     font-size: 15px;
   }
 }
 
-@media (max-width: 768px) {
-  /* Increase touch targets */
-  button,
-  a {
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Touch-friendly controls without blowing up every inline link */
+@layer utilities {
+  .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
-  /* Exclude inline links */
-  p a,
-  span a {
-    @apply min-h-0 min-w-0;
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }

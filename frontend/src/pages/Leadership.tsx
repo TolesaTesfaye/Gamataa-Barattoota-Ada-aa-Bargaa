@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import apiClient from "../services/api"
+import { useAuthStore } from "../store/authStore"
 
 interface Leader {
   _id: string
@@ -35,6 +36,7 @@ const avatarColors = [
 ]
 
 export default function Leadership() {
+  const { token } = useAuthStore()
   const [leaders, setLeaders] = useState<Leader[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -98,24 +100,22 @@ export default function Leadership() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-purple-900 py-24 px-4">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-purple-900 py-12 sm:py-16 md:py-20 px-4">
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-lg">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3 sm:mb-4 drop-shadow-lg">
             Our Leadership
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
             Meet the dedicated team guiding GBAABW forward with vision and integrity.
           </p>
         </div>
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="max-w-6xl mx-auto px-3 sm:px-4 py-10 sm:py-16">
         {error && (
-          <div className="flex items-center gap-3 bg-red-900/30 border border-red-500/40 text-red-300 rounded-xl px-6 py-4 mb-8">
-            <svg className="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="flex items-center gap-3 bg-red-900/30 border border-red-500/40 text-red-300 rounded-xl px-4 sm:px-6 py-3 sm:py-4 mb-6 sm:mb-8 text-sm">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
             </svg>
             <span>{error} — showing sample data</span>
@@ -124,50 +124,60 @@ export default function Leadership() {
 
         {leaders.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-gray-500">
-            <svg className="w-20 h-20 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-            </svg>
-            <p className="text-xl font-medium">No leadership data found.</p>
+            <p className="text-lg sm:text-xl font-medium">No leadership data found.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {leaders.map((leader, index) => (
-              <Link
-                key={leader._id}
-                to={`/members/${leader._id}`}
-                className="group bg-gray-800/40 border border-gray-700/50 rounded-xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300"
-              >
-                <div className="p-6 text-center">
-                  {leader.profileImage ? (
-                    <img
-                      src={leader.profileImage}
-                      alt={leader.fullName}
-                      className="w-24 h-24 object-cover rounded-full mx-auto mb-4 ring-2 ring-gray-600 group-hover:ring-blue-400 transition-all"
-                    />
-                  ) : (
-                    <div className={`w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold bg-gradient-to-br ${avatarColors[index % avatarColors.length]} ring-2 ring-gray-600 group-hover:ring-blue-400 transition-all`}>
-                      {getInitials(leader.fullName)}
-                    </div>
-                  )}
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-                    {leader.fullName}
-                  </h3>
-                  <p className="text-blue-400 font-semibold text-sm mt-1">{leader.designation}</p>
-                  {leader.department && (
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mt-1">{leader.department}</p>
-                  )}
-                  {leader.bio && (
-                    <p className="text-gray-400 mt-3 text-sm leading-relaxed line-clamp-3">{leader.bio}</p>
-                  )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {leaders.map((leader, index) => {
+              const cardInner = (
+                <>
+                  <div className="p-5 sm:p-6 text-center">
+                    {leader.profileImage ? (
+                      <img
+                        src={leader.profileImage}
+                        alt={leader.fullName}
+                        className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-full mx-auto mb-4 ring-2 ring-gray-600 group-hover:ring-blue-400 transition-all"
+                      />
+                    ) : (
+                      <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-xl sm:text-2xl font-bold bg-gradient-to-br ${avatarColors[index % avatarColors.length]} ring-2 ring-gray-600 group-hover:ring-blue-400 transition-all`}>
+                        {getInitials(leader.fullName)}
+                      </div>
+                    )}
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                      {leader.fullName}
+                    </h3>
+                    <p className="text-blue-400 font-semibold text-sm mt-1">{leader.designation}</p>
+                    {leader.department && (
+                      <p className="text-gray-500 text-xs uppercase tracking-wider mt-1">{leader.department}</p>
+                    )}
+                    {leader.bio && (
+                      <p className="text-gray-400 mt-3 text-sm leading-relaxed line-clamp-3">{leader.bio}</p>
+                    )}
+                  </div>
+                  <div className="border-t border-gray-700/50 px-4 sm:px-6 py-3 flex items-center justify-center gap-2 text-gray-400 group-hover:text-blue-400 transition-colors">
+                    <span className="text-xs sm:text-sm truncate max-w-full">{leader.email}</span>
+                  </div>
+                </>
+              )
+
+              const className =
+                "group bg-gray-800/40 border border-gray-700/50 rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 block"
+
+              // Member profiles require login — guests see cards without private links
+              if (token && !leader._id.startsWith("s")) {
+                return (
+                  <Link key={leader._id} to={`/members/${leader._id}`} className={className}>
+                    {cardInner}
+                  </Link>
+                )
+              }
+
+              return (
+                <div key={leader._id} className={className}>
+                  {cardInner}
                 </div>
-                <div className="border-t border-gray-700/50 px-6 py-3 flex items-center justify-center gap-2 text-gray-400 group-hover:text-blue-400 transition-colors">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                  </svg>
-                  <span className="text-sm">{leader.email}</span>
-                </div>
-              </Link>
-            ))}
+              )
+            })}
           </div>
         )}
       </section>

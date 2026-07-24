@@ -3,12 +3,11 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import { useAuthStore } from "./store/authStore";
 import Layout from "./components/Layout";
 import PublicLanding from "./pages/PublicLanding";
-import Home from "./pages/Home";
-
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -18,16 +17,14 @@ import LeaderDashboard from "./pages/LeaderDashboard";
 import Members from "./pages/Members";
 import Events from "./pages/Events";
 import News from "./pages/News";
-import About from "./pages/About";
+import Waaee from "./pages/Waaee";
 import Leadership from "./pages/Leadership";
 import GalleryPage from "./pages/GalleryPage";
 import Contact from "./pages/Contact";
 import FAQs from "./pages/FAQs";
-import Service from "./pages/Service";
 import Galata from "./pages/Galata";
 import Ergaa from "./pages/Ergaa";
 import Yaadannoo from "./pages/Yaadannoo";
-import Waaee from "./pages/Waaee";
 import Koreewwan from "./pages/Koreewwan";
 import Students from "./pages/Students";
 import StudentDetail from "./pages/StudentDetail";
@@ -53,6 +50,40 @@ import AdminStudents from "./pages/AdminStudents";
 
 const ADMIN_ROLES = ["superadmin", "admin"];
 
+function PrivateRoute({ children }: { children: React.ReactNode }) {
+  const { token } = useAuthStore();
+  const location = useLocation();
+
+  if (!token) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  }
+  return children;
+}
+
+function AdminRoute({ children }: { children: React.ReactNode }) {
+  const { user, token } = useAuthStore();
+  if (!token || !user?.role || !ADMIN_ROLES.includes(user.role)) {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return children;
+}
+
+function SuperAdminRoute({ children }: { children: React.ReactNode }) {
+  const { user, token } = useAuthStore();
+  if (!token || user?.role !== "superadmin") {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return children;
+}
+
+function AdminRouteSingle({ children }: { children: React.ReactNode }) {
+  const { user, token } = useAuthStore();
+  if (!token || user?.role !== "admin") {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return children;
+}
+
 function App() {
   return (
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -62,79 +93,131 @@ function App() {
 }
 
 function AppRoutes() {
-  const { user, token } = useAuthStore();
-
-  const AdminRoute = ({ children }: { children: React.ReactNode }) => {
-    if (!token || !user?.role || !ADMIN_ROLES.includes(user.role)) {
-      return <Navigate to="/dashboard" replace />;
-    }
-    return children;
-  };
-
-  const SuperAdminRoute = ({ children }: { children: React.ReactNode }) => {
-    if (!token || user?.role !== "superadmin") {
-      return <Navigate to="/dashboard" replace />;
-    }
-    return children;
-  };
-
-  const AdminRouteSingle = ({ children }: { children: React.ReactNode }) => {
-    if (!token || user?.role !== "admin") {
-      return <Navigate to="/dashboard" replace />;
-    }
-    return children;
-  };
-
-  if (!token) {
-    return (
-      <Routes>
-        <Route path="/" element={<PublicLanding />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    );
-  }
-
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
       <Route element={<Layout />}>
-        <Route path="/" element={<Waaee />} />
-        <Route path="/members" element={<Members />} />
+        {/* Public core */}
+        <Route path="/" element={<PublicLanding />} />
+        <Route path="/waaee" element={<Waaee />} />
+        <Route path="/about" element={<Navigate to="/waaee" replace />} />
+        <Route path="/service" element={<Navigate to="/waaee" replace />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/news" element={<News />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/leadership" element={<Leadership />} />
+        <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/leadership" element={<Leadership />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faqs" element={<FAQs />} />
-        <Route path="/service" element={<Service />} />
         <Route path="/galata" element={<Galata />} />
         <Route path="/ergaa" element={<Ergaa />} />
         <Route path="/yaadannoo" element={<Yaadannoo />} />
-        <Route path="/waaee" element={<Waaee />} />
         <Route path="/koreewwan" element={<Koreewwan />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/students/:id" element={<StudentDetail />} />
-        <Route path="/news/:id" element={<NewsDetail />} />
-        <Route path="/events/:id" element={<EventDetail />} />
-        <Route path="/members/:id" element={<MemberDetail />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
 
-        {/* Student Dashboard */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/my-events" element={<MyEvents />} />
-        <Route path="/documents" element={<Documents />} />
-        <Route path="/alumni" element={<AlumniNetwork />} />
-        <Route path="/opportunities" element={<Opportunities />} />
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/notifications" element={<Notifications />} />
+        {/* Member-only */}
+        <Route
+          path="/members"
+          element={
+            <PrivateRoute>
+              <Members />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/members/:id"
+          element={
+            <PrivateRoute>
+              <MemberDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/students"
+          element={
+            <PrivateRoute>
+              <Students />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/students/:id"
+          element={
+            <PrivateRoute>
+              <StudentDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my-events"
+          element={
+            <PrivateRoute>
+              <MyEvents />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/documents"
+          element={
+            <PrivateRoute>
+              <Documents />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/alumni"
+          element={
+            <PrivateRoute>
+              <AlumniNetwork />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/opportunities"
+          element={
+            <PrivateRoute>
+              <Opportunities />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/resources"
+          element={
+            <PrivateRoute>
+              <Resources />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <PrivateRoute>
+              <Notifications />
+            </PrivateRoute>
+          }
+        />
 
-        {/* Superadmin Routes */}
+        {/* Superadmin */}
         <Route
           path="/superadmin/dashboard"
           element={
@@ -152,7 +235,7 @@ function AppRoutes() {
           }
         />
 
-        {/* Admin Dashboard (for president, VP, secretary, social media manager, etc.) */}
+        {/* Admin dashboard */}
         <Route
           path="/admin/dashboard"
           element={
@@ -162,7 +245,7 @@ function AppRoutes() {
           }
         />
 
-        {/* Content Management (shared by superadmin + leader) */}
+        {/* Content management */}
         <Route
           path="/admin/events"
           element={

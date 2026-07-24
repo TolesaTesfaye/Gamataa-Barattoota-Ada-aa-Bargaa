@@ -46,33 +46,39 @@ export default function FAQs() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-700 dark:to-blue-900 text-white rounded-2xl p-12 text-center shadow-lg">
-        <h1 className="text-5xl font-bold mb-4">Gaaffilee Yeroo Baay'ee Gaafataman</h1>
-        <p className="text-xl text-blue-100">Waa'ee Gamtaa Barattoota Ada'a Bargaa odeeffannoo argadhaa</p>
+    <div className="space-y-6 sm:space-y-8 px-3 sm:px-4 md:px-0 pb-4">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-700 dark:to-blue-900 text-white rounded-xl sm:rounded-2xl p-6 sm:p-10 md:p-12 text-center shadow-lg">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4">
+          Gaaffilee Yeroo Baay&apos;ee Gaafataman
+        </h1>
+        <p className="text-sm sm:text-lg md:text-xl text-blue-100">
+          Waa&apos;ee Gamtaa Barattoota Ada&apos;a Bargaa odeeffannoo argadhaa
+        </p>
       </div>
 
-      <div className="max-w-xl mx-auto relative">
-        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="max-w-xl mx-auto relative px-0">
+        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input
-          type="text"
+          type="search"
+          inputMode="search"
+          enterKeyHint="search"
           placeholder="Gaaffilee Barbaadi..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full border border-gray-300 dark:border-gray-600 rounded-xl pl-11 pr-4 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition shadow-lg dark:shadow-gray-900/50"
+          className="w-full border border-gray-300 dark:border-gray-600 rounded-xl pl-11 pr-4 py-3 min-h-[48px] bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition shadow-lg dark:shadow-gray-900/50 text-base"
         />
       </div>
 
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex gap-2 overflow-x-auto scrollbar-none -mx-3 px-3 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center pb-1">
         {CATEGORIES.map(cat => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all ${
+            className={`shrink-0 px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl font-medium text-sm transition-all ${
               activeCategory === cat
-                ? "bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white shadow-lg shadow-blue-500/25 dark:shadow-blue-500/10"
+                ? "bg-blue-600 dark:bg-blue-500 text-white shadow-lg shadow-blue-500/25"
                 : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 shadow dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700"
             }`}
           >
@@ -102,11 +108,11 @@ export default function FAQs() {
             >
               <button
                 onClick={() => toggleFAQ(faq.id)}
-                className="w-full text-left px-6 py-4 flex justify-between items-center gap-4 transition"
+                className="w-full text-left px-4 sm:px-6 py-4 min-h-[56px] flex justify-between items-center gap-3 sm:gap-4 transition"
               >
                 <div className="flex-1 min-w-0">
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">{faq.category}</span>
-                  <h3 className={`text-base font-semibold mt-0.5 transition-colors ${
+                  <h3 className={`text-sm sm:text-base font-semibold mt-0.5 transition-colors ${
                     openId === faq.id ? "text-blue-800 dark:text-blue-200" : "text-gray-900 dark:text-gray-100"
                   }`}>
                     {faq.question}
@@ -123,10 +129,10 @@ export default function FAQs() {
               </button>
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openId === faq.id ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  openId === faq.id ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="px-6 pb-5 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-blue-100 dark:border-blue-800/50 pt-4 text-sm">
+                <div className="px-4 sm:px-6 pb-5 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-blue-100 dark:border-blue-800/50 pt-4 text-sm">
                   {faq.answer}
                 </div>
               </div>
