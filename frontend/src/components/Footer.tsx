@@ -8,6 +8,8 @@ export default function Footer() {
     { to: "/events", label: "Events" },
     { to: "/news", label: "News" },
     { to: "/gallery", label: "Gallery" },
+    { to: "/students", label: "Students" },
+    { to: "/contact", label: "Contact" },
     { to: "/faqs", label: "FAQs" },
     { to: "/leadership", label: "Leadership" },
   ];
@@ -18,7 +20,6 @@ export default function Footer() {
     { to: "/galata", label: "Thanksgiving" },
     { to: "/ergaa", label: "Brief Message" },
     { to: "/yaadannoo", label: "Memorial" },
-    { to: "/contact", label: "Contact Us" },
   ];
 
   const memberLinks = [

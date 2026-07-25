@@ -13,6 +13,10 @@ export interface IMember extends Document {
   bio: string;
   profileImage: string;
   isPublic: boolean;
+  tenureYear?: number; // Year of leadership (e.g., 2015, 2018, 2024)
+  tenureStartYear?: number; // Start year of leadership period
+  tenureEndYear?: number; // End year of leadership period (optional, null means current)
+  isCurrent: boolean; // Flag to indicate if this is current leadership
   createdAt: Date;
   updatedAt: Date;
 }
@@ -71,6 +75,22 @@ const memberSchema = new Schema<IMember>(
     isPublic: {
       type: Boolean,
       default: true,
+    },
+    tenureYear: {
+      type: Number,
+      required: false,
+    },
+    tenureStartYear: {
+      type: Number,
+      required: false,
+    },
+    tenureEndYear: {
+      type: Number,
+      required: false,
+    },
+    isCurrent: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

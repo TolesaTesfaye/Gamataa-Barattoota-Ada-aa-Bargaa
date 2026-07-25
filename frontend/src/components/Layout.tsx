@@ -18,6 +18,8 @@ const EXPLORE_LINKS = [
   { to: "/events", label: "Events" },
   { to: "/news", label: "News" },
   { to: "/gallery", label: "Gallery" },
+  { to: "/students", label: "Students" },
+  { to: "/contact", label: "Contact" },
 ];
 
 const RESOURCE_LINKS = [
@@ -181,6 +183,7 @@ export default function Layout() {
         : "/dashboard";
 
   const manageItems = [
+    { to: dashboardPath, label: "Dashboard" },
     ...(user?.role === "superadmin"
       ? [{ to: "/superadmin/dashboard", label: "Super Admin Dashboard" }]
       : []),
@@ -190,6 +193,7 @@ export default function Layout() {
     { to: "/admin/events", label: "Event Management" },
     { to: "/admin/news", label: "News Management" },
     { to: "/admin/gallery", label: "Gallery Management" },
+    { to: "/admin/leadership", label: "Leadership Management" },
     { to: "/admin/documents", label: "Documents" },
     { to: "/admin/alumni", label: "Alumni" },
     { to: "/admin/opportunities", label: "Opportunities" },
@@ -197,7 +201,7 @@ export default function Layout() {
     ...(user?.role === "superadmin"
       ? [
           { to: "/superadmin/users", label: "User Management" },
-          { to: "/admin/students", label: "Students" },
+          { to: "/admin/students", label: "Students Management" },
         ]
       : []),
   ];
@@ -255,7 +259,7 @@ export default function Layout() {
                 </span>
               </Link>
 
-              {/* Desktop: Home · About ▾ · Explore ▾ · Contact (+ member groups) */}
+              {/* Desktop: Home · About ▾ · Explore ▾ (+ member groups) */}
               <div className="hidden xl:flex items-center gap-0.5 ml-2">
                 <NavLinkButton
                   to="/"
@@ -275,25 +279,9 @@ export default function Layout() {
                   items={EXPLORE_LINKS}
                   onNavigate={go}
                 />
-                <NavLinkButton
-                  to="/contact"
-                  label="Contact"
-                  active={isActive("/contact")}
-                  onNavigate={go}
-                />
 
                 {user && (
                   <>
-                    <NavLinkButton
-                      to={dashboardPath}
-                      label="Dashboard"
-                      active={
-                        isActive("/dashboard") ||
-                        isActive("/admin/dashboard") ||
-                        isActive("/superadmin/dashboard")
-                      }
-                      onNavigate={go}
-                    />
                     <DropdownMenu
                       label="Community"
                       active={
@@ -318,7 +306,8 @@ export default function Layout() {
                     label="Manage"
                     active={
                       location.pathname.startsWith("/admin") ||
-                      location.pathname.startsWith("/superadmin")
+                      location.pathname.startsWith("/superadmin") ||
+                      isActive("/dashboard")
                     }
                     items={manageItems}
                     onNavigate={go}
@@ -692,15 +681,6 @@ function MobileMenu({
           </Link>
         ))}
 
-        <p className={sectionHeadingClass}>Connect</p>
-        <Link
-          to="/contact"
-          onClick={closeMenu}
-          className={linkClass("/contact")}
-        >
-          Contact
-        </Link>
-
         {user && (
           <>
             <p className={sectionHeadingClass}>Account</p>
@@ -718,13 +698,6 @@ function MobileMenu({
                 </p>
               </div>
             </div>
-            <Link
-              to={dashboardPath}
-              onClick={closeMenu}
-              className={linkClass(dashboardPath)}
-            >
-              Dashboard
-            </Link>
 
             <p className={sectionHeadingClass}>Community</p>
             <Link
@@ -770,6 +743,13 @@ function MobileMenu({
         {(user?.role === "superadmin" || user?.role === "admin") && (
           <>
             <p className={sectionHeadingClass}>Manage</p>
+            <Link
+              to={dashboardPath}
+              onClick={closeMenu}
+              className={linkClass(dashboardPath)}
+            >
+              Dashboard
+            </Link>
             {user.role === "superadmin" && (
               <Link
                 to="/superadmin/dashboard"
@@ -808,6 +788,13 @@ function MobileMenu({
               className={linkClass("/admin/gallery")}
             >
               Gallery Management
+            </Link>
+            <Link
+              to="/admin/leadership"
+              onClick={closeMenu}
+              className={linkClass("/admin/leadership")}
+            >
+              Leadership Management
             </Link>
             <Link
               to="/admin/contact"

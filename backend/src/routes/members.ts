@@ -4,6 +4,18 @@ import { authenticate, authorize } from '../middleware/auth.js';
 
 const router: Router = express.Router();
 
+// Get all members (admin endpoint - returns all members including non-public)
+router.get('/all', authenticate, authorize(['superadmin', 'admin']), async (req: Request, res: Response) => {
+  try {
+    const members = await Member.find()
+      .populate('userId', 'firstName lastName email')
+      .sort({ joinDate: -1 });
+    res.json(members);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch members', error });
+  }
+});
+
 // Get all public members
 router.get('/', async (req: Request, res: Response) => {
   try {
@@ -36,7 +48,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 // Create member (admin or authenticated user)
 router.post('/', authenticate, async (req: Request, res: Response) => {
   try {
-    const { fullName, email, phone, department, designation, bio, profileImage } = req.body;
+    const { fullName, email, phone, department, designation, bio, profileImage, isPublic, tenureStartYear, tenureEndYear, isCurrent } = req.body;
 
     const membershipNumber = `GBAA-${Date.now()}`;
 
@@ -50,6 +62,10 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
       designation,
       bio,
       profileImage,
+      isPublic: isPublic !== undefined ? isPublic : true, // Default to true if not provided
+      tenureStartYear,
+      tenureEndYear,
+      isCurrent: isCurrent !== undefined ? isCurrent : false,
     });
 
     res.status(201).json({ message: 'Member created successfully', member });

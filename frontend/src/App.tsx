@@ -47,6 +47,7 @@ import AdminAlumni from "./pages/AdminAlumni";
 import AdminOpportunities from "./pages/AdminOpportunities";
 import AdminContact from "./pages/AdminContact";
 import AdminStudents from "./pages/AdminStudents";
+import AdminLeadership from "./pages/AdminLeadership";
 
 const ADMIN_ROLES = ["superadmin", "admin"];
 
@@ -308,6 +309,14 @@ function AppRoutes() {
             <SuperAdminRoute>
               <AdminStudents />
             </SuperAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/leadership"
+          element={
+            <AdminRoute>
+              <AdminLeadership />
+            </AdminRoute>
           }
         />
 
