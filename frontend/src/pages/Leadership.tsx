@@ -61,12 +61,17 @@ export default function Leadership() {
       try {
         const response = await apiClient.get("/members")
         const members: Leader[] = response.data
-        console.log("All members from API:", members)
-        console.log("Total members fetched:", members.length)
         
-        const filtered = members.filter((m) => {
+        // Add default values for new fields if they don't exist
+        const membersWithDefaults = members.map(m => ({
+          ...m,
+          tenureStartYear: m.tenureStartYear || undefined,
+          tenureEndYear: m.tenureEndYear || undefined,
+          isCurrent: m.isCurrent !== undefined ? m.isCurrent : false,
+        }))
+        
+        const filtered = membersWithDefaults.filter((m) => {
           const role = (m.designation || "").toLowerCase().trim()
-          console.log(`Checking member: ${m.fullName}, designation: "${m.designation}", lowercase: "${role}"`)
           
           const isLeader = (
             role === "president" ||
@@ -79,15 +84,9 @@ export default function Leadership() {
             role.includes("director")
           )
           
-          if (isLeader) {
-            console.log(`✓ ${m.fullName} is a leader`)
-          }
-          
           return isLeader
         })
         
-        console.log("Filtered leaders:", filtered)
-        console.log("Total leaders found:", filtered.length)
         setLeaders(filtered)
 
         // Group leaders by year
@@ -99,9 +98,9 @@ export default function Leadership() {
         if (currentGroup) {
           setExpandedYears(new Set([currentGroup.year]))
         }
-      } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "Failed to load leadership data"
+      } catch (err: any) {
         console.error("Error fetching leaders:", err)
+        const msg = err?.response?.data?.message || err?.message || "Failed to load leadership data. Please try again later."
         setError(msg)
       } finally {
         setLoading(false)
