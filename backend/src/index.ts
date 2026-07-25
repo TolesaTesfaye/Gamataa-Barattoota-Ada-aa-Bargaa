@@ -40,18 +40,29 @@ app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (curl, mobile apps, etc.)
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      
+      // Allow all origins that match these patterns
       if (
-        !origin ||
         allowedOrigins.includes(origin) ||
         origin.endsWith(".vercel.app") ||
-        origin.endsWith(".up.railway.app")
+        origin.endsWith(".up.railway.app") ||
+        origin.includes("localhost")
       ) {
         callback(null, true);
       } else {
-        callback(null, true); // Allow all in production for now
+        // In production, allow all for now (can be restricted later)
+        callback(null, true);
       }
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    maxAge: 86400, // 24 hours
   }),
 );
 
