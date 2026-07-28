@@ -26,40 +26,15 @@ const app: Express = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS Configuration - MUST be before other middleware
-const allowedOrigins = [
-  process.env.FRONTEND_URL || "http://localhost:5173",
-  "https://gamataa-barattoota-ada-aa-bargaa.vercel.app",
-  "https://gbaabw-backend.up.railway.app",
-  "https://gamataa-barattoota-ada-aa-bargaa-production.up.railway.app",
-].filter(Boolean);
-
+// Temporarily allow all origins to debug the issue
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (curl, mobile apps, etc.)
-      if (!origin) {
-        callback(null, true);
-        return;
-      }
-      
-      // Allow all origins that match these patterns
-      if (
-        allowedOrigins.includes(origin) ||
-        origin.endsWith(".vercel.app") ||
-        origin.endsWith(".up.railway.app") ||
-        origin.includes("localhost")
-      ) {
-        callback(null, true);
-      } else {
-        // In production, allow all for now (can be restricted later)
-        callback(null, true);
-      }
-    },
+    origin: true, // Allow all origins temporarily
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
     exposedHeaders: ['Content-Range', 'X-Content-Range'],
-    maxAge: 86400, // 24 hours
+    maxAge: 86400,
     preflightContinue: false,
     optionsSuccessStatus: 204
   })
