@@ -30,8 +30,23 @@ const PORT = process.env.PORT || 5000;
 app.use((req: Request, res: Response, next: NextFunction) => {
   const origin = req.headers.origin;
   
-  // Allow all origins for now
-  if (origin) {
+  // List of allowed origins
+  const allowedOrigins = [
+    'https://gamataa-barattoota-ada-aa-bargaa.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000',
+  ];
+  
+  // Allow specific origins or domains that end with .vercel.app, .onrender.com, or localhost
+  if (origin && (
+    allowedOrigins.includes(origin) ||
+    origin.endsWith('.vercel.app') ||
+    origin.endsWith('.onrender.com') ||
+    origin.includes('localhost')
+  )) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (origin) {
+    // In production, allow all for now (can be restricted later)
     res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
     res.setHeader('Access-Control-Allow-Origin', '*');
